@@ -11,10 +11,11 @@ androidx-espresso-core = "3.6.1"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-plugin = "1.6.11"
+coreKtx = "1.6.0"
 junit = "4.13.2"
 kotlin = "2.0.0"
 # navigation
-precompose = "1.6.1"
+navigation = "2.8.0-alpha02"
 # logger
 napierVersion = "2.7.1"
 # DI
@@ -22,9 +23,13 @@ koin = "3.4.3"
 koin-compose = "1.0.4"
 kotlin2 = "1.9.0"
 jetbrainsKotlinJvm = "2.0.0"
-
+# lottie
+kottie = "1.9.6"
+# ui controller
+accompanist-systemuicontroller = "0.32.0"
 
 [libraries]
+androidx-core-ktx-v160 = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,15 +41,17 @@ androidx-material = { group = "com.google.android.material", name = "material", 
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 # navigation
-precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
-precompose_viewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "precompose" }
-precompose_koin = { module = "moe.tlaster:precompose-koin", version.ref = "precompose" }
+compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation" }
 # logger
 napier = { module = "io.github.aakira:napier", version.ref = "napierVersion" }
 # DI
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose"}
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
+# lottie animation
+kottie = { module = "io.github.ismai117:kottie", version.ref = "kottie" }
+# ui controller
+systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist-systemuicontroller" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

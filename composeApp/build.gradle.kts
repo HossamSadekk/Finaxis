@@ -42,13 +42,14 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             // navigation
-            api(libs.precompose)
-            api(libs.precompose.viewmodel)
-            api(libs.precompose.koin)
+            api(libs.compose.navigation)
             // logger
             implementation(libs.napier)
             // DI
             implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            // ui controller
+            implementation(libs.systemuicontroller)
         }
     }
 }
