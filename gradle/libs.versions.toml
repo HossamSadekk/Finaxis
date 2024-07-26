@@ -27,6 +27,10 @@ jetbrainsKotlinJvm = "2.0.0"
 kottie = "1.9.6"
 # ui controller
 accompanist-systemuicontroller = "0.32.0"
+# tests libs
+ui_junit = "1.6.8"
+ui_manifest = "1.6.8"
+assertk = "0.28.1"
 
 [libraries]
 androidx-core-ktx-v160 = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -52,6 +56,10 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-com
 kottie = { module = "io.github.ismai117:kottie", version.ref = "kottie" }
 # ui controller
 systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanist-systemuicontroller" }
+# tests libs
+ui-test-junit = { module = "androidx.compose.ui:ui-test-junit4-android", version.ref = "ui_junit" }
+ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "ui_manifest" }
+assertion = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertk" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
