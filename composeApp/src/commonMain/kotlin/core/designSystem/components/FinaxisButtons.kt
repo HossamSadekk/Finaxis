@@ -2,8 +2,10 @@ package core.designSystem.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,5 +41,44 @@ fun FinaxisWideButton(
             style = MaterialTheme.typography.titleSmall.copy(fontFamily = FontFamily(Font(Res.font.poppins_regular))),
             color = textColor
         )
+    }
+}
+
+@Composable
+fun FinaxisButton(
+    onClick: () -> Unit,
+    buttonText: String,
+    modifier: Modifier = Modifier,
+    containerColor: Color = MaterialTheme.colorScheme.onPrimary,
+    textColor: Color = MaterialTheme.colorScheme.onBackground,
+    height: Dp = 50.dp,
+    isClickable: Boolean = true,
+    isLoading: Boolean = false,
+) {
+    Button(
+        onClick = { if (isClickable && !isLoading) onClick.invoke() },
+        modifier = modifier
+            .fillMaxWidth(1f)
+            .height(height),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = containerColor,
+            disabledContainerColor = containerColor.copy(alpha = 0.5f) // Slightly different color for disabled state
+        ),
+        enabled = isClickable && !isLoading // Enable/disable button based on conditions
+    ) {
+        if (isLoading) {
+            CircularProgressIndicator(
+                color = textColor,
+                strokeWidth = 2.dp,
+                modifier = Modifier
+                    .size(24.dp)
+            )
+        } else {
+            Text(
+                text = buttonText,
+                style = MaterialTheme.typography.titleSmall.copy(fontFamily = FontFamily(Font(Res.font.poppins_regular))),
+                color = textColor
+            )
+        }
     }
 }

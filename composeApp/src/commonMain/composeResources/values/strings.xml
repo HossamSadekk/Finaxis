@@ -3,4 +3,11 @@
     <string name="discover_the_power_of_seamless">Discover the power of seamless banking. We're excited to help you manage your finances effortlessly. Let’s get started!</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="please_enter_your_phone_number">Please Provide Your Phone Number</string>
+    <string name="signup_description">To complete your registration, please enter your phone number. We'll send you a verification code to confirm it's really you.</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="signIn_description">Welcome back! Please enter your phone number to sign in and enjoy our services.</string>
+    <string name="username">Username</string>
+
 </resources>

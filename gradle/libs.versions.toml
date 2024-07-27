@@ -13,6 +13,7 @@ androidx-test-junit = "1.2.1"
 compose-plugin = "1.6.11"
 coreKtx = "1.13.1"
 junit = "4.13.2"
+koinCore = "3.2.2"
 kotlin = "2.0.0"
 # navigation
 navigation = "2.8.0-alpha02"
@@ -31,9 +32,13 @@ accompanist-systemuicontroller = "0.32.0"
 ui_junit = "1.6.8"
 ui_manifest = "1.6.8"
 assertk = "0.28.1"
+material3Android = "1.2.1"
+foundationAndroid = "1.6.8"
+messagebarkmp = "0.3.8"
 
 [libraries]
 androidx-core-ktx-v160 = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+koin-koin-core = { module = "org.koin:koin-core", version.ref = "koinCore" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -60,6 +65,9 @@ systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicont
 ui-test-junit = { module = "androidx.compose.ui:ui-test-junit4-android", version.ref = "ui_junit" }
 ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "ui_manifest" }
 assertion = { module = "com.willowtreeapps.assertk:assertk", version.ref = "assertk" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
+messagebarkmp = { module = "io.github.dokar3:sonner", version.ref = "messagebarkmp" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

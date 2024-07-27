@@ -35,6 +35,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.koin.android)
+            implementation(libs.koin.core)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -53,6 +54,8 @@ kotlin {
             implementation(libs.koin.compose)
             // ui controller
             implementation(libs.systemuicontroller)
+            // toast
+            implementation(libs.messagebarkmp)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
@@ -106,6 +109,8 @@ android {
     }
 }
 dependencies {
+    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.foundation.android)
     testImplementation("junit:junit:4.12")
 }
 

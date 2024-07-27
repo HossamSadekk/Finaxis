@@ -4,6 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import presentation.authScreen.nav.navigateToSignInpScreen
+import presentation.authScreen.nav.navigateToSignUpScreen
+import presentation.authScreen.nav.signInScreen
+import presentation.authScreen.nav.signUpScreen
 import presentation.splashScreen.nav.splashScreen
 import presentation.splashScreen.nav.splashScreenRoute
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_IN
@@ -23,13 +27,20 @@ fun MainNavigation(
         welcomeScreen { destination ->
             when (destination) {
                 SIGN_IN -> {
-                    // TODO :: navigate to sign in screen
+                    navController.navigateToSignInpScreen()
                 }
 
                 SIGN_UP -> {
-                    // TODO :: navigate to sign up screen
+                    navController.navigateToSignUpScreen()
                 }
             }
+        }
+
+        signUpScreen {
+            navController.navigateUp()
+        }
+        signInScreen {
+            navController.navigateUp()
         }
     }
 }
