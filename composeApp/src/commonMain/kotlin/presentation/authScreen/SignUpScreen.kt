@@ -30,7 +30,7 @@ import core.extensions.isValidUsername
 import core.sharedPlatform.PlatformColors
 import core.sharedPlatform.showToast
 import finaxis.composeapp.generated.resources.Res
-import finaxis.composeapp.generated.resources.please_enter_your_phone_number
+import finaxis.composeapp.generated.resources.get_started_by_sharing
 import finaxis.composeapp.generated.resources.poppins_bold
 import finaxis.composeapp.generated.resources.poppins_regular
 import finaxis.composeapp.generated.resources.signup_description
@@ -109,7 +109,7 @@ fun SignUpContent(
                 .weight(1f)
         ) {
             Text(
-                text = stringResource(Res.string.please_enter_your_phone_number),
+                text = stringResource(Res.string.get_started_by_sharing),
                 style = MaterialTheme.typography.titleLarge.copy(fontFamily = FontFamily(Font(Res.font.poppins_bold))),
                 color = MaterialTheme.colorScheme.inversePrimary,
                 fontSize = 30.sp
