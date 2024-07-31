@@ -3,19 +3,22 @@ package presentation.authScreen.nav
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import core.navigation.transitionNavigation.slideComposable
-import presentation.authScreen.SignInScreen
-import presentation.authScreen.SignUpScreen
+import presentation.authScreen.signin.SignInScreen
+import presentation.authScreen.signup.SignUpScreen
 
 const val signUpScreenRoute = "signupScreen"
 const val signInScreenRoute = "signInpScreen"
 
-fun NavGraphBuilder.signUpScreen(onBackPressed: () -> Unit) {
+fun NavGraphBuilder.signUpScreen(onBackPressed: () -> Unit, onNextPressed: (String, String) -> Unit) {
     slideComposable(route = signUpScreenRoute) {
-        SignUpScreen {
+        SignUpScreen(onBackPressed = {
             onBackPressed()
-        }
+        }, onNextPressed = { phoneNumber, userName ->
+            onNextPressed(phoneNumber, userName)
+        })
     }
 }
+
 fun NavGraphBuilder.signInScreen(onBackPressed: () -> Unit) {
     slideComposable(route = signInScreenRoute) {
         SignInScreen {
@@ -23,6 +26,7 @@ fun NavGraphBuilder.signInScreen(onBackPressed: () -> Unit) {
         }
     }
 }
+
 fun NavController.navigateToSignUpScreen() =
     this.navigate(signUpScreenRoute)
 

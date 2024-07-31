@@ -1,4 +1,4 @@
-package presentation.authScreen
+package presentation.authScreen.signup
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import core.designSystem.components.AppBar
-import core.designSystem.components.FinaxisButton
+import core.designSystem.components.FinaxisWideButton
 import core.designSystem.components.PhoneNumberSection
 import core.designSystem.components.UsernameSection
 import core.designSystem.helper.PhoneNumberState
@@ -38,7 +38,7 @@ import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SignUpScreen(onBackPressed: () -> Unit) {
+fun SignUpScreen(onBackPressed: () -> Unit, onNextPressed: (String, String) -> Unit) {
     PlatformColors(
         statusBarColor = MaterialTheme.colorScheme.onBackground,
         navBarColor = MaterialTheme.colorScheme.onBackground
@@ -46,7 +46,6 @@ fun SignUpScreen(onBackPressed: () -> Unit) {
 
     var phoneNumberState by remember { mutableStateOf(PhoneNumberState()) }
     var usernameState by remember { mutableStateOf(UsernameState()) }
-    var isLoading by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = { AppBar(onBackClicked = onBackPressed) }
@@ -61,13 +60,11 @@ fun SignUpScreen(onBackPressed: () -> Unit) {
             onUsernameChange = { newUsername ->
                 usernameState = usernameState.copy(username = newUsername)
             },
-            isLoading = isLoading,
-            isClickable = true,
             onSubmit = {
                 when {
                     !usernameState.username.isValidUsername() -> {
                         // Handle invalid username
-                        showToast("please provide a valid username")
+                        showToast("please provide at least first and second name")
 
                     }
 
@@ -78,7 +75,7 @@ fun SignUpScreen(onBackPressed: () -> Unit) {
                     }
 
                     else -> {
-                        // Call signup function
+                        onNextPressed(phoneNumberState.phoneNumber, usernameState.username)
                     }
                 }
             }
@@ -93,8 +90,6 @@ fun SignUpContent(
     onPhoneNumberChange: (String) -> Unit,
     usernameState: UsernameState,
     onUsernameChange: (String) -> Unit,
-    isLoading: Boolean,
-    isClickable: Boolean,
     onSubmit: () -> Unit,
 ) {
     Column(
@@ -128,12 +123,10 @@ fun SignUpContent(
                 onPhoneNumberChange = onPhoneNumberChange
             )
         }
-        FinaxisButton(
+        FinaxisWideButton(
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp),
-            onClick = onSubmit,
-            buttonText = "Submit",
-            isClickable = isClickable,
-            isLoading = isLoading
+            onClick = { onSubmit.invoke() },
+            buttonText = "Next"
         )
     }
 }

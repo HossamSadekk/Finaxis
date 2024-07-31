@@ -8,6 +8,8 @@ import presentation.authScreen.nav.navigateToSignInpScreen
 import presentation.authScreen.nav.navigateToSignUpScreen
 import presentation.authScreen.nav.signInScreen
 import presentation.authScreen.nav.signUpScreen
+import presentation.passcode.nav.navigateToPasscode
+import presentation.passcode.nav.passcodeScreen
 import presentation.splashScreen.nav.splashScreen
 import presentation.splashScreen.nav.splashScreenRoute
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_IN
@@ -36,9 +38,12 @@ fun MainNavigation(
             }
         }
 
-        signUpScreen {
+        signUpScreen(onBackPressed = {
             navController.navigateUp()
-        }
+        }, onNextPressed = { phoneNumber, userName ->
+            navController.navigateToPasscode(phoneNumber, userName)
+        })
+        passcodeScreen(onBackPressed = { navController.navigateUp() })
         signInScreen {
             navController.navigateUp()
         }

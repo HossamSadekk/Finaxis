@@ -3,7 +3,8 @@ agp = "8.2.2"
 android-compileSdk = "34"
 android-minSdk = "24"
 android-targetSdk = "34"
-androidx-activityCompose = "1.9.0"
+org-jetbrains-kotlin-android = "2.0.0"
+androidx-activityCompose = "1.9.1"
 androidx-appcompat = "1.7.0"
 androidx-constraintlayout = "2.1.4"
 androidx-core-ktx = "1.13.1"
@@ -20,9 +21,11 @@ navigation = "2.8.0-alpha02"
 # logger
 napierVersion = "2.7.1"
 # DI
-koin = "3.4.3"
-koin-compose = "1.0.4"
-kotlin2 = "1.9.0"
+koin = "3.5.6"
+koinCompose = "1.1.5"
+koinComposeViewModel = "1.2.0-Beta4"
+#
+kotlin2 = "1.9.10"
 jetbrainsKotlinJvm = "2.0.0"
 # lottie
 kottie = "1.9.6"
@@ -35,6 +38,9 @@ assertk = "0.28.1"
 material3Android = "1.2.1"
 foundationAndroid = "1.6.8"
 messagebarkmp = "0.3.8"
+kotlinx-serialization = "1.6.2"
+ktorClientCore = "2.3.12"
+viewmodel = "2.8.0"
 
 [libraries]
 androidx-core-ktx-v160 = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -54,9 +60,11 @@ compose-navigation = { module = "org.jetbrains.androidx.navigation:navigation-co
 # logger
 napier = { module = "io.github.aakira:napier", version.ref = "napierVersion" }
 # DI
-koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewmodel" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
+
 # lottie animation
 kottie = { module = "io.github.ismai117:kottie", version.ref = "kottie" }
 # ui controller
@@ -68,7 +76,15 @@ assertion = { module = "com.willowtreeapps.assertk:assertk", version.ref = "asse
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 messagebarkmp = { module = "io.github.dokar3:sonner", version.ref = "messagebarkmp" }
+#
 
+#
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientCore" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientCore" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClientCore" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorClientCore" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorClientCore" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -77,3 +93,4 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin2" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin-android" }

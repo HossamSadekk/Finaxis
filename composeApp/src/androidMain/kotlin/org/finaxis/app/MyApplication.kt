@@ -1,6 +1,7 @@
 package org.finaxis.app
 
 import android.app.Application
+import app.initializeKoin
 
 class MyApplication : Application() {
     companion object {
@@ -11,5 +12,6 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        initializeKoin()
     }
 }

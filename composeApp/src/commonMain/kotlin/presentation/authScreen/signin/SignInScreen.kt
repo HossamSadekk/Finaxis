@@ -1,4 +1,4 @@
-package presentation.authScreen
+package presentation.authScreen.signin
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
