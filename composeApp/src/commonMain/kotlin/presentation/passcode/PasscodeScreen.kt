@@ -89,8 +89,9 @@ fun PasscodeScreen(phoneNumber: String?, username: String?, onBackPressed: () ->
                 }
 
                 is RequestState.Success -> {
-                    val user = (state as RequestState.Success).data
-                    println("Success ${user.token}")
+                    isLoading = false
+                    val response = (state as RequestState.Success).data
+                    viewModel.cacheUserLoginState(token = response.token)
                 }
 
                 is RequestState.Error -> {

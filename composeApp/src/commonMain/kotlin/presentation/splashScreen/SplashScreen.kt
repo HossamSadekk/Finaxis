@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,9 +31,18 @@ import kotlinx.coroutines.delay
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
+import presentation.splashScreen.nav.SplashScreenDest
+import presentation.splashScreen.nav.SplashScreenDest.KYC_INTRO
+import presentation.splashScreen.nav.SplashScreenDest.WELCOME_SCREEN
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
-fun SplashScreen(onSplashEnd: () -> Unit) {
+fun SplashScreen(onNavigation: (SplashScreenDest) -> Unit) {
+    val viewModel = koinViewModel<SplashViewModel>()
+    val isLoggedIn by viewModel.isLoggedIn.collectAsState()
+
     val scaleAnimationDuration = 1000 // Duration of the scale up and down animation
     val initialDelay = 1000 // Initial delay before starting the animation
     val delayBeforeEnd = 2000 // Duration to keep the final state before calling onSplashEnd
@@ -52,7 +62,11 @@ fun SplashScreen(onSplashEnd: () -> Unit) {
         startAnimation = false // Start scaling down
         // Delay for the final size before calling onSplashEnd
         delay(delayBeforeEnd.toLong())
-        onSplashEnd()
+        if (isLoggedIn) {
+            onNavigation(KYC_INTRO)
+        } else {
+            onNavigation(WELCOME_SCREEN)
+        }
     }
 
     PlatformColors(

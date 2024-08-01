@@ -1,5 +1,6 @@
 package app
 
+import core.local.di.localModule
 import core.network.di.networkModule
 import data.di.dataModule
 import domain.di.domainModule
@@ -15,6 +16,7 @@ fun initializeKoin() {
 
 val commonModule = module {
     includes(networkModule)
+    includes(localModule)
     includes(dataModule)
     includes(domainModule)
     includes(presentationModule)

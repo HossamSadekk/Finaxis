@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import core.navigation.nestedNavGraph.kyaNavGraph
+import core.navigation.nestedNavGraph.navigateToKycNavGraph
 import presentation.authScreen.nav.navigateToSignInpScreen
 import presentation.authScreen.nav.navigateToSignUpScreen
 import presentation.authScreen.nav.signInScreen
@@ -11,6 +13,8 @@ import presentation.authScreen.nav.signUpScreen
 import presentation.passcode.nav.navigateToPasscode
 import presentation.passcode.nav.passcodeScreen
 import presentation.passcode.nav.passcodeScreenRoute
+import presentation.splashScreen.nav.SplashScreenDest.KYC_INTRO
+import presentation.splashScreen.nav.SplashScreenDest.WELCOME_SCREEN
 import presentation.splashScreen.nav.splashScreen
 import presentation.splashScreen.nav.splashScreenRoute
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_IN
@@ -22,10 +26,18 @@ import presentation.welcomeScreen.nav.welcomeScreen
 fun MainNavigation(
     navController: NavHostController = rememberNavController(),
 ) {
-    NavHost(navController = navController, startDestination = passcodeScreenRoute) {
+    NavHost(navController = navController, startDestination = splashScreenRoute) {
 
-        splashScreen {
-            navController.navigateToWelcomeScreen()
+        splashScreen { destination ->
+            when (destination) {
+                WELCOME_SCREEN -> {
+                    navController.navigateToWelcomeScreen()
+                }
+
+                KYC_INTRO -> {
+                    navController.navigateToKycNavGraph()
+                }
+            }
         }
         welcomeScreen { destination ->
             when (destination) {
@@ -44,9 +56,11 @@ fun MainNavigation(
         }, onNextPressed = { phoneNumber, userName ->
             navController.navigateToPasscode(phoneNumber, userName)
         })
-        passcodeScreen(onBackPressed = { navController.navigateUp() })
         signInScreen {
             navController.navigateUp()
         }
+        passcodeScreen(onBackPressed = { navController.navigateUp() })
+        /** Nav Graph For KYC **/
+        kyaNavGraph(navController)
     }
 }

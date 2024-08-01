@@ -1,4 +1,4 @@
-package domain.usecase
+package domain.usecase.apiUseCases
 
 import core.base.usecase.BaseUseCase
 import core.network.utils.ApiResponse

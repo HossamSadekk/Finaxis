@@ -6,10 +6,15 @@ import presentation.splashScreen.SplashScreen
 
 const val splashScreenRoute = "splashScreen"
 
-fun NavGraphBuilder.splashScreen(onSplashEnd: () -> Unit) {
+fun NavGraphBuilder.splashScreen(onNavigation: (SplashScreenDest) -> Unit) {
     slideComposable(route = splashScreenRoute) {
-        SplashScreen {
-            onSplashEnd()
+        SplashScreen { destination ->
+            onNavigation(destination)
         }
     }
+}
+
+enum class SplashScreenDest {
+    WELCOME_SCREEN,
+    KYC_INTRO
 }

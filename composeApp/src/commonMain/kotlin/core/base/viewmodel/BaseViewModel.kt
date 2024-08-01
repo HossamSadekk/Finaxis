@@ -3,6 +3,9 @@ package core.base.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import core.network.utils.ApiResponse
+import io.github.aakira.napier.Napier
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
@@ -12,7 +15,7 @@ open class BaseViewModel : ViewModel() {
         onError: (String) -> Unit,
         onSuccess: (value: R) -> Unit,
     ) {
-        viewModelScope.launch {
+        safeLaunch {
             onStart()
             try {
                 when (val result = block()) {
@@ -24,5 +27,13 @@ open class BaseViewModel : ViewModel() {
                 onError(errorMessage)
             }
         }
+    }
+
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        Napier.e(message = exception.message.orEmpty())
+    }
+
+    protected fun safeLaunch(block: suspend CoroutineScope.() -> Unit) {
+        viewModelScope.launch(handler, block = block)
     }
 }

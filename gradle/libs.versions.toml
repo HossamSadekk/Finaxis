@@ -35,12 +35,17 @@ accompanist-systemuicontroller = "0.32.0"
 ui_junit = "1.6.8"
 ui_manifest = "1.6.8"
 assertk = "0.28.1"
+#
 material3Android = "1.2.1"
 foundationAndroid = "1.6.8"
 messagebarkmp = "0.3.8"
+#ktor
 kotlinx-serialization = "1.6.2"
 ktorClientCore = "2.3.12"
 viewmodel = "2.8.0"
+# Datastore
+datastore = "1.1.1"
+atomicfu = "0.23.2"
 
 [libraries]
 androidx-core-ktx-v160 = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -64,6 +69,7 @@ viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewm
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 
 # lottie animation
 kottie = { module = "io.github.ismai117:kottie", version.ref = "kottie" }
@@ -76,15 +82,17 @@ assertion = { module = "com.willowtreeapps.assertk:assertk", version.ref = "asse
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
 messagebarkmp = { module = "io.github.dokar3:sonner", version.ref = "messagebarkmp" }
-#
-
-#
+#ktor
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientCore" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientCore" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClientCore" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorClientCore" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorClientCore" }
+# datastore
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
+atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicfu" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }

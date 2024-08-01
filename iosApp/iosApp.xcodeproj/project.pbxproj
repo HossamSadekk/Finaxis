@@ -11,6 +11,7 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		B04EFD5D2C5BE5B400FA1460 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B04EFD5C2C5BE5B400FA1460 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B04EFD5D2C5BE5B400FA1460 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +107,7 @@
 			);
 			name = iosApp;
 			packageProductDependencies = (
+				B04EFD5C2C5BE5B400FA1460 /* Lottie */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* Finaxis.app */;
@@ -136,6 +139,7 @@
 			);
 			mainGroup = 7555FF72242A565900829871;
 			packageReferences = (
+				B04EFD5B2C5BE5B400FA1460 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
@@ -388,6 +392,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B04EFD5B2C5BE5B400FA1460 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B04EFD5C2C5BE5B400FA1460 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B04EFD5B2C5BE5B400FA1460 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7555FF73242A565900829871 /* Project object */;
 }

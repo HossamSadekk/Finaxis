@@ -9,5 +9,7 @@
     <string name="welcome_back">Welcome Back</string>
     <string name="signIn_description">Welcome back! Please enter your phone number to sign in and enjoy our services.</string>
     <string name="username">Username</string>
+    <string name="kyc_intro_title">Just a few steps to your account</string>
+    <string name="kyc_intro_description">To ensure a safe and secure experience, we need to verify your identity. Please follow the steps to complete the KYC process.</string>
 
 </resources>
