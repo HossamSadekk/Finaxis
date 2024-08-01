@@ -25,19 +25,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import core.designSystem.components.AppBar
+import core.designSystem.components.CustomErrorDialog
+import core.designSystem.components.LoaderWithOffset
 import core.designSystem.components.NumberPad
 import core.designSystem.components.PasscodeView
 import core.network.utils.RequestState
 import core.sharedPlatform.PlatformColors
 import core.utils.PASSCODE_LENGTH
 import data.model.RegisterRequest
-import data.model.TokenResponse
 import finaxis.composeapp.generated.resources.Res.font
 import finaxis.composeapp.generated.resources.poppins_medium
 import org.jetbrains.compose.resources.Font
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
-import presentation.passcode.PasscodeViewmodel.Companion.REGISTER_STATE
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
@@ -48,43 +48,67 @@ fun PasscodeScreen(phoneNumber: String?, username: String?, onBackPressed: () ->
     )
     val viewModel = koinViewModel<PasscodeViewmodel>()
     var passcode by remember { mutableStateOf("") }
+    var isLoading by remember { mutableStateOf(false) }
+    var showDialog by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
     val state by viewModel.tokenState.collectAsState()
 
-    Scaffold(
-        topBar = { AppBar(modifier = Modifier.fillMaxWidth()) { onBackPressed() } }
-    ) { paddingValues ->
-        PasscodeContent(modifier = Modifier.padding(paddingValues), passcode,
-            onNumberClick = {
-                if (passcode.length < PASSCODE_LENGTH) {
-                    passcode += it
-                    if (passcode.length == PASSCODE_LENGTH) {
-                        viewModel.registerUser(
-                            registerRequest = RegisterRequest(
-                                username.orEmpty(),
-                                phoneNumber.orEmpty(),
-                                passcode
+    LoaderWithOffset(
+        isLoading = isLoading,
+        offset = 50
+    ) {
+        Scaffold(
+            topBar = { AppBar(modifier = Modifier.fillMaxWidth()) { onBackPressed() } }
+        ) { paddingValues ->
+            PasscodeContent(modifier = Modifier.padding(paddingValues), passcode,
+                onNumberClick = {
+                    if (passcode.length < PASSCODE_LENGTH) {
+                        passcode += it
+                        if (passcode.length == PASSCODE_LENGTH) {
+                            viewModel.registerUser(
+                                registerRequest = RegisterRequest(
+                                    username.orEmpty(),
+                                    phoneNumber.orEmpty(),
+                                    passcode
+                                )
                             )
-                        )
+                        }
                     }
+                }, onDeleteAction = {
+                    if (passcode.isNotEmpty()) {
+                        passcode = passcode.dropLast(1)
+                    }
+                })
+            when (state) {
+                is RequestState.Idle -> {
+                    Unit
                 }
-            }, onDeleteAction = {
-                if (passcode.isNotEmpty()) {
-                    passcode = passcode.dropLast(1)
+
+                is RequestState.Loading -> {
+                    isLoading = true
                 }
-            })
-        when (state) {
-            is RequestState.Idle -> {
-                Text("idle")
+
+                is RequestState.Success -> {
+                    val user = (state as RequestState.Success).data
+                    println("Success ${user.token}")
+                }
+
+                is RequestState.Error -> {
+                    val error = (state as RequestState.Error).message
+                    errorMessage = error
+                    isLoading = false
+                    showDialog = true
+                }
             }
-            is RequestState.Loading -> {
-                println("loading")
-            }
-            is RequestState.Success -> {
-                val user = (state as RequestState.Success).data
-                println("Success ${user.token}")
-            }
-            is RequestState.Error -> {
-                println("Error: ${(state as RequestState.Error).message}")
+            if (showDialog) {
+                CustomErrorDialog(
+                    title = "Error",
+                    message = errorMessage,
+                    onDismiss = {
+                        showDialog = false
+                        viewModel.resetErrorState()
+                    }
+                )
             }
         }
     }

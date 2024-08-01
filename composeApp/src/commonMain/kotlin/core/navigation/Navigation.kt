@@ -10,6 +10,7 @@ import presentation.authScreen.nav.signInScreen
 import presentation.authScreen.nav.signUpScreen
 import presentation.passcode.nav.navigateToPasscode
 import presentation.passcode.nav.passcodeScreen
+import presentation.passcode.nav.passcodeScreenRoute
 import presentation.splashScreen.nav.splashScreen
 import presentation.splashScreen.nav.splashScreenRoute
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_IN
@@ -21,7 +22,7 @@ import presentation.welcomeScreen.nav.welcomeScreen
 fun MainNavigation(
     navController: NavHostController = rememberNavController(),
 ) {
-    NavHost(navController = navController, startDestination = splashScreenRoute) {
+    NavHost(navController = navController, startDestination = passcodeScreenRoute) {
 
         splashScreen {
             navController.navigateToWelcomeScreen()

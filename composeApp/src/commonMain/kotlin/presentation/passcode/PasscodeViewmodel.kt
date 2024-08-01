@@ -23,4 +23,8 @@ class PasscodeViewmodel(private val registerUserUseCase: RegisterUserUseCase) : 
                 _tokenState.update { RequestState.Success(response) }
             }
         )
+
+    fun resetErrorState() {
+        _tokenState.value = RequestState.Idle
+    }
 }
