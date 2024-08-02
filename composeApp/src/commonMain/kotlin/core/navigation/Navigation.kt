@@ -12,7 +12,6 @@ import presentation.authScreen.nav.signInScreen
 import presentation.authScreen.nav.signUpScreen
 import presentation.passcode.nav.navigateToPasscode
 import presentation.passcode.nav.passcodeScreen
-import presentation.passcode.nav.passcodeScreenRoute
 import presentation.splashScreen.nav.SplashScreenDest.KYC_INTRO
 import presentation.splashScreen.nav.SplashScreenDest.WELCOME_SCREEN
 import presentation.splashScreen.nav.splashScreen
@@ -59,8 +58,10 @@ fun MainNavigation(
         signInScreen {
             navController.navigateUp()
         }
-        passcodeScreen(onBackPressed = { navController.navigateUp() })
+        passcodeScreen(
+            onBackPressed = { navController.navigateUp() },
+            onPasscodeSuccess = { navController.navigateToKycNavGraph() })
         /** Nav Graph For KYC **/
-        kyaNavGraph(navController)
+        kyaNavGraph()
     }
 }

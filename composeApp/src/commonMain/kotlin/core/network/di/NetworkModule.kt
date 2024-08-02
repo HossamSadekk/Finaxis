@@ -1,8 +1,8 @@
 package core.network.di
 
 import core.network.ktorHelpers.KtorLogger
-import core.network.utils.Rout.BASE_URL
 import core.network.utils.Rout.TIME_OUT
+import core.sharedPlatform.NetworkConfig
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -28,7 +28,7 @@ val networkModule = module {
                 level = LogLevel.ALL
             }
             install(DefaultRequest) {
-                url(BASE_URL)
+                url(NetworkConfig.baseUrl)
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
 
             }

@@ -41,7 +41,7 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun PasscodeScreen(phoneNumber: String?, username: String?, onBackPressed: () -> Unit) {
+fun PasscodeScreen(phoneNumber: String?, username: String?, onBackPressed: () -> Unit, onPasscodeSuccess: () -> Unit) {
     PlatformColors(
         statusBarColor = MaterialTheme.colorScheme.background,
         navBarColor = MaterialTheme.colorScheme.background
@@ -92,6 +92,7 @@ fun PasscodeScreen(phoneNumber: String?, username: String?, onBackPressed: () ->
                     isLoading = false
                     val response = (state as RequestState.Success).data
                     viewModel.cacheUserLoginState(token = response.token)
+                    onPasscodeSuccess()
                 }
 
                 is RequestState.Error -> {
