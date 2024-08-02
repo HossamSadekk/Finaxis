@@ -20,6 +20,7 @@ import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_IN
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_UP
 import presentation.welcomeScreen.nav.navigateToWelcomeScreen
 import presentation.welcomeScreen.nav.welcomeScreen
+import presentation.welcomeScreen.nav.welcomeScreenRoute
 
 @Composable
 fun MainNavigation(
@@ -34,7 +35,7 @@ fun MainNavigation(
                 }
 
                 KYC_INTRO -> {
-                    navController.navigateToKycNavGraph()
+                    navController.navigateToKycNavGraph(startDestination = splashScreenRoute)
                 }
             }
         }
@@ -60,7 +61,7 @@ fun MainNavigation(
         }
         passcodeScreen(
             onBackPressed = { navController.navigateUp() },
-            onPasscodeSuccess = { navController.navigateToKycNavGraph() })
+            onPasscodeSuccess = { navController.navigateToKycNavGraph(startDestination = welcomeScreenRoute) })
         /** Nav Graph For KYC **/
         kyaNavGraph()
     }

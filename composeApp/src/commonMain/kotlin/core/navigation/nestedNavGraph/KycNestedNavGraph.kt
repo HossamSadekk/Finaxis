@@ -2,6 +2,7 @@ package core.navigation.nestedNavGraph
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.navigation
 import presentation.kyc.nav.KycIntroScreenRoute
 import presentation.kyc.nav.KycScreenRoute
@@ -16,9 +17,9 @@ fun NavGraphBuilder.kyaNavGraph() {
     }
 }
 
-fun NavController.navigateToKycNavGraph() =
+fun NavController.navigateToKycNavGraph(startDestination: String) =
     this.navigate(KycScreenRoute) {
-        popUpTo(welcomeScreenRoute) { inclusive = true }
+        popUpTo(startDestination) { inclusive = true }
         launchSingleTop = true
     }
 
