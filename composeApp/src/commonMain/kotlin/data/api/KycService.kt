@@ -6,4 +6,5 @@ import data.model.SelectBankRequestModel
 
 interface KycService {
     suspend fun selectBank(selectBankRequestModel: SelectBankRequestModel): ApiResponse<GenericResponseModel>
+    suspend fun setPhoneNumber(phoneNumber: String): ApiResponse<GenericResponseModel>
 }

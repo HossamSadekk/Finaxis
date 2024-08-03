@@ -88,7 +88,7 @@ fun EnterPhoneNumber(
                 value = state.phoneNumber,
                 onValueChange = { value ->
                     val sanitizedValue = value.filter { it.isDigit() }
-                    if (sanitizedValue.length <= 10) {
+                    if (sanitizedValue.length <= 11) {
                         val prefixLength = validPrefixes.minOfOrNull { it.length } ?: 0
                         val startsWithValidPrefix = sanitizedValue.length >= prefixLength &&
                                                     validPrefixes.any { sanitizedValue.startsWith(it) }

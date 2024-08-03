@@ -42,9 +42,9 @@ suspend inline fun <reified T> HttpClient.getRequest(
     }
 }
 
-suspend inline fun <reified T, reified R> HttpClient.postRequest(
+suspend inline fun <reified T> HttpClient.postRequest(
     path: String,
-    requestBody: R,
+    requestBody: Any? = null,
     queryParams: Map<String, String> = emptyMap(),
 ): ApiResponse<T> {
     return try {

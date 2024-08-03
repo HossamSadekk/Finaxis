@@ -3,11 +3,14 @@ package core.navigation.nestedNavGraph
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
+import kotlinx.coroutines.flow.map
 import presentation.bank.nav.bankSelectionScreen
 import presentation.bank.nav.navigateToBankSelectionScreen
 import presentation.kyc.nav.KycIntroScreenRoute
 import presentation.kyc.nav.KycScreenRoute
 import presentation.kyc.nav.kycIntroScreen
+import presentation.kyc_phoneNumber.nav.navigateToPhoneNumberKycScreen
+import presentation.kyc_phoneNumber.nav.phoneNumberKycScreen
 
 fun NavGraphBuilder.kyaNavGraph(navController: NavController) {
     navigation(startDestination = KycIntroScreenRoute, route = KycScreenRoute) {
@@ -17,8 +20,11 @@ fun NavGraphBuilder.kyaNavGraph(navController: NavController) {
         bankSelectionScreen(onBackPressed = {
             navController.navigateUp()
         }, onProceedClicked = {
-
+            navController.navigateToPhoneNumberKycScreen()
         })
+        phoneNumberKycScreen(onBackPressed = {
+            navController.navigateUp()
+        }, onProceedClicked = { })
     }
 }
 
@@ -33,3 +39,5 @@ fun NavController.navigateToKycNavGraph(startDestination: String) =
 //        popUpTo(welcomeScreenRoute) { inclusive = true }
 //        launchSingleTop = true
 //    }
+
+

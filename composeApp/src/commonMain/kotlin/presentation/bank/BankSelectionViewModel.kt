@@ -101,5 +101,9 @@ class BankSelectionViewModel(
     fun resetErrorState() {
         _banks.value = Idle
     }
+
+    fun resetSubmitSelectedBank() {
+        _submitSelectBanks.value = Idle
+    }
 }
 

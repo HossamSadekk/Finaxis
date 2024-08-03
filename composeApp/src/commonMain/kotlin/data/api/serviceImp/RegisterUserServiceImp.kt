@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 class RegisterUserServiceImp(private val httpClient: HttpClient) : RegisterUserService {
     override suspend fun registerUser(registerRequest: RegisterRequest): ApiResponse<TokenResponse> =
-        httpClient.postRequest<TokenResponse, RegisterRequest>(
+        httpClient.postRequest<TokenResponse>(
             path = REGISTER,
             requestBody = registerRequest
         )

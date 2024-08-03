@@ -156,6 +156,7 @@ fun BankSelectionScreen(onBackPressed: () -> Unit, onProceedSuccess: () -> Unit)
             if (submitSelectedBank.isSuccess()) {
                 /** Navigate to Next Screen **/
                 onProceedSuccess()
+                viewModel.resetSubmitSelectedBank()
             }
         }
     }

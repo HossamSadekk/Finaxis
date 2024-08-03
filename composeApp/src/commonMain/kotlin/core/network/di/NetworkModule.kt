@@ -11,6 +11,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.plugins.DefaultRequest
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.cookies.AcceptAllCookiesStorage
+import io.ktor.client.plugins.cookies.HttpCookies
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.header
@@ -34,6 +36,9 @@ val networkModule = module {
                 url(NetworkConfig.baseUrl)
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
 
+            }
+            install(HttpCookies) {
+                storage = AcceptAllCookiesStorage()
             }
             install(ContentNegotiation) {
                 json(Json {
