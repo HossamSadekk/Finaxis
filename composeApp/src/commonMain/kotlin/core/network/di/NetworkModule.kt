@@ -1,8 +1,10 @@
 package core.network.di
 
 import core.network.ktorHelpers.KtorLogger
+import core.network.ktorHelpers.addTokenInterceptor
 import core.network.utils.Rout.TIME_OUT
 import core.sharedPlatform.NetworkConfig
+import domain.repository.UserManagerRepository
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
@@ -22,6 +24,7 @@ import org.koin.dsl.module
 @OptIn(ExperimentalSerializationApi::class)
 val networkModule = module {
     single {
+        val userManagerRepository: UserManagerRepository by inject<UserManagerRepository>()
         HttpClient() {
             install(Logging) {
                 logger = KtorLogger()
@@ -44,6 +47,7 @@ val networkModule = module {
                 connectTimeoutMillis = TIME_OUT
                 socketTimeoutMillis = TIME_OUT
             }
+            addTokenInterceptor { userManagerRepository.getUserToken() }
         }.also { Napier.base(DebugAntilog()) }
     }
 }

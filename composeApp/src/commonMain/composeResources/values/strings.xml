@@ -11,5 +11,7 @@
     <string name="username">Username</string>
     <string name="kyc_intro_title">Just a few steps to your account</string>
     <string name="kyc_intro_description">To ensure a safe and secure experience, we need to verify your identity. Please follow the steps to complete the KYC process.</string>
+    <string name="kyc_first_step_title">Step 1: Choose Your Bank</string>
+    <string name="kyc_first_step_description">To get started with your KYC process, please select your bank from the list below. This step helps us tailor the verification process to your specific bank's requirements.</string>
 
 </resources>

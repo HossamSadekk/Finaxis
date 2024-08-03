@@ -46,6 +46,9 @@ viewmodel = "2.8.0"
 # Datastore
 datastore = "1.1.1"
 atomicfu = "0.23.2"
+# image loader
+image-loader-version = "1.5.3"
+
 
 [libraries]
 androidx-core-ktx-v160 = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
@@ -70,6 +73,9 @@ koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinCompose" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+# image loader
+image-loader = {module= "io.github.qdsfdhvh:image-loader", version.ref = "image-loader-version"}
+
 
 # lottie animation
 kottie = { module = "io.github.ismai117:kottie", version.ref = "kottie" }

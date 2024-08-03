@@ -2,6 +2,7 @@ package domain.di
 
 import domain.usecase.localUseCases.GetUserLoggedInUseCase
 import domain.usecase.apiUseCases.RegisterUserUseCase
+import domain.usecase.apiUseCases.GetBanksUseCase
 import domain.usecase.localUseCases.SaveUserLoggedInUseCase
 import domain.usecase.localUseCases.SaveUserTokenUseCase
 import domain.usecase.localUseCases.GetUserTokenUseCase
@@ -14,4 +15,5 @@ val domainModule = module {
     singleOf(::GetUserLoggedInUseCase)
     singleOf(::SaveUserTokenUseCase)
     singleOf(::GetUserTokenUseCase)
+    singleOf(::GetBanksUseCase)
 }

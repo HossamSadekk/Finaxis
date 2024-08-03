@@ -2,18 +2,21 @@ package core.navigation.nestedNavGraph
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.navigation
+import presentation.Bank.nav.bankSelectionScreen
+import presentation.Bank.nav.navigateToBankSelectionScreen
 import presentation.kyc.nav.KycIntroScreenRoute
 import presentation.kyc.nav.KycScreenRoute
 import presentation.kyc.nav.kycIntroScreen
-import presentation.welcomeScreen.nav.welcomeScreenRoute
 
-fun NavGraphBuilder.kyaNavGraph() {
+fun NavGraphBuilder.kyaNavGraph(navController: NavController) {
     navigation(startDestination = KycIntroScreenRoute, route = KycScreenRoute) {
         kycIntroScreen {
-
+            navController.navigateToBankSelectionScreen()
         }
+        bankSelectionScreen(onBackPressed = {
+            navController.navigateUp()
+        })
     }
 }
 

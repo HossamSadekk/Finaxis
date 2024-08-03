@@ -18,7 +18,7 @@ fun AppBar(modifier: Modifier = Modifier, onBackClicked: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .padding(
-                all = 16.dp
+                all = 8.dp
             )
     ) {
 

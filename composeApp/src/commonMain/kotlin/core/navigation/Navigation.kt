@@ -63,6 +63,6 @@ fun MainNavigation(
             onBackPressed = { navController.navigateUp() },
             onPasscodeSuccess = { navController.navigateToKycNavGraph(startDestination = welcomeScreenRoute) })
         /** Nav Graph For KYC **/
-        kyaNavGraph()
+        kyaNavGraph(navController = navController)
     }
 }
