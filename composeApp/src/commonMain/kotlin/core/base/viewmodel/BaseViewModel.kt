@@ -6,6 +6,7 @@ import core.network.utils.ApiResponse
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 open class BaseViewModel : ViewModel() {
@@ -17,6 +18,7 @@ open class BaseViewModel : ViewModel() {
     ) {
         safeLaunch {
             onStart()
+            delay(3000L)
             try {
                 when (val result = block()) {
                     is ApiResponse.Success -> onSuccess(result.data)

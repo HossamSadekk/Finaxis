@@ -1,4 +1,4 @@
-package presentation.Bank
+package presentation.bank
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -48,13 +48,13 @@ import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
-import presentation.Bank.components.BankComponent
-import presentation.Bank.components.BanksShimmerItem
-import presentation.Bank.components.SearchSection
+import presentation.bank.components.BankComponent
+import presentation.bank.components.BanksShimmerItem
+import presentation.bank.components.SearchSection
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun BankSelectionScreen(onBackPressed: () -> Unit) {
+fun BankSelectionScreen(onBackPressed: () -> Unit, onProceedSuccess: () -> Unit) {
     PlatformColors(
         statusBarColor = MaterialTheme.colorScheme.onBackground,
         navBarColor = MaterialTheme.colorScheme.onBackground
@@ -63,6 +63,7 @@ fun BankSelectionScreen(onBackPressed: () -> Unit) {
     val viewModel = koinViewModel<BankSelectionViewModel>()
     val banksState by viewModel.banks.collectAsState()
     val searchState by viewModel.searchState.collectAsState()
+    val submitSelectedBank by viewModel.submitSelectBanks.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
 
@@ -148,10 +149,14 @@ fun BankSelectionScreen(onBackPressed: () -> Unit) {
             }
             // button
             ButtonSection(
-                onButtonClick = {},
+                onButtonClick = { viewModel.submitSelectedBank() },
                 selectedBank = viewModel.selectedBank.value,
-                isLoading = false
+                isLoading = submitSelectedBank.isLoading()
             )
+            if (submitSelectedBank.isSuccess()) {
+                /** Navigate to Next Screen **/
+                onProceedSuccess()
+            }
         }
     }
 }
@@ -174,7 +179,7 @@ fun ButtonSection(
     modifier: Modifier = Modifier,
     onButtonClick: () -> Unit,
     selectedBank: Bank?,
-    isLoading: Boolean
+    isLoading: Boolean,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

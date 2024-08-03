@@ -8,5 +8,6 @@ object Rout {
 object Endpoints {
     const val REGISTER = "auth/register"
     const val BANK = "api/banks"
+    const val KYC_SELECT_BANK = "api/kyc/select-bank"
 
 }

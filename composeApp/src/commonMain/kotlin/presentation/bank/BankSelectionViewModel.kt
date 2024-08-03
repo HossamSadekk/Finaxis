@@ -1,4 +1,4 @@
-package presentation.Bank
+package presentation.bank
 
 import core.base.viewmodel.BaseViewModel
 import core.designSystem.helper.SearchState
@@ -6,12 +6,18 @@ import core.network.utils.RequestState
 import core.network.utils.RequestState.Idle
 import data.model.Bank
 import data.model.BankResponse
+import data.model.GenericResponseModel
+import data.model.SelectBankRequestModel
 import domain.usecase.apiUseCases.GetBanksUseCase
+import domain.usecase.apiUseCases.SelectBankUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class BankSelectionViewModel(private val getBanksUseCase: GetBanksUseCase) : BaseViewModel() {
+class BankSelectionViewModel(
+    private val getBanksUseCase: GetBanksUseCase,
+    private val selectBankUseCase: SelectBankUseCase,
+) : BaseViewModel() {
     /** bank state **/
     private val _banks = MutableStateFlow<RequestState<BankResponse>>(Idle)
     val banks: StateFlow<RequestState<BankResponse>> get() = _banks
@@ -23,6 +29,10 @@ class BankSelectionViewModel(private val getBanksUseCase: GetBanksUseCase) : Bas
     /** Search state **/
     private val _searchState = MutableStateFlow(SearchState())
     val searchState: StateFlow<SearchState> get() = _searchState
+
+    /** select bank state **/
+    private val _submitSelectBanks = MutableStateFlow<RequestState<GenericResponseModel>>(Idle)
+    val submitSelectBanks: StateFlow<RequestState<GenericResponseModel>> get() = _submitSelectBanks
 
     init {
         getBanks()
@@ -71,6 +81,21 @@ class BankSelectionViewModel(private val getBanksUseCase: GetBanksUseCase) : Bas
                 filteredBanks = filteredBanks
             )
         }
+    }
+
+    fun submitSelectedBank() {
+        executeUseCase(
+            block = { selectBankUseCase.execute(SelectBankRequestModel(_selectedBank.value?.id ?: 0)) },
+            onStart = {
+                _submitSelectBanks.update { RequestState.Loading }
+            },
+            onError = { error ->
+                _submitSelectBanks.update { RequestState.Error(error) }
+            },
+            onSuccess = { response ->
+                _submitSelectBanks.update { RequestState.Success(response) }
+            }
+        )
     }
 
     fun resetErrorState() {

@@ -3,8 +3,8 @@ package core.navigation.nestedNavGraph
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
-import presentation.Bank.nav.bankSelectionScreen
-import presentation.Bank.nav.navigateToBankSelectionScreen
+import presentation.bank.nav.bankSelectionScreen
+import presentation.bank.nav.navigateToBankSelectionScreen
 import presentation.kyc.nav.KycIntroScreenRoute
 import presentation.kyc.nav.KycScreenRoute
 import presentation.kyc.nav.kycIntroScreen
@@ -16,6 +16,8 @@ fun NavGraphBuilder.kyaNavGraph(navController: NavController) {
         }
         bankSelectionScreen(onBackPressed = {
             navController.navigateUp()
+        }, onProceedClicked = {
+
         })
     }
 }

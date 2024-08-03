@@ -1,4 +1,4 @@
-package presentation.Bank.components
+package presentation.bank.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
