@@ -23,7 +23,12 @@ class PhoneNumberKycViewModel(private val setPhoneNumberKYCUseCase: SetPhoneNumb
             _phoneNumberState.update { RequestState.Success(response) }
         })
     }
+
     fun resetErrorState() {
+        _phoneNumberState.value = Idle
+    }
+
+    fun resetSubmitPhoneNumber() {
         _phoneNumberState.value = Idle
     }
 

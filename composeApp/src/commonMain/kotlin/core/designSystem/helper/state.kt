@@ -14,3 +14,11 @@ data class SearchState(
     val query: String = "",
     val filteredBanks: List<Bank> = emptyList(),
 )
+
+data class CardNumberState(
+    val cardNumber: String = "",
+)
+
+data class CardPasswordState(
+    val cardPassword: String = "",
+)

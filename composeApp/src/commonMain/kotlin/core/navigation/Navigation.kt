@@ -10,6 +10,8 @@ import presentation.authScreen.nav.navigateToSignInpScreen
 import presentation.authScreen.nav.navigateToSignUpScreen
 import presentation.authScreen.nav.signInScreen
 import presentation.authScreen.nav.signUpScreen
+import presentation.kyc_cardInfo.nav.cardInfoKycRoute
+import presentation.kyc_cardInfo.nav.cardInfoKycScreen
 import presentation.passcode.nav.navigateToPasscode
 import presentation.passcode.nav.passcodeScreen
 import presentation.splashScreen.nav.SplashScreenDest.KYC_INTRO
@@ -26,8 +28,12 @@ import presentation.welcomeScreen.nav.welcomeScreenRoute
 fun MainNavigation(
     navController: NavHostController = rememberNavController(),
 ) {
-    NavHost(navController = navController, startDestination = splashScreenRoute) {
+    NavHost(navController = navController, startDestination = cardInfoKycRoute) {
+        cardInfoKycScreen(onBackPressed = {
+            navController.navigateUp()
+        }, onProceedClicked = {
 
+        })
         splashScreen { destination ->
             when (destination) {
                 WELCOME_SCREEN -> {

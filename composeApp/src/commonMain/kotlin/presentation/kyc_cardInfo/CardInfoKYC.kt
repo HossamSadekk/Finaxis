@@ -1,4 +1,4 @@
-package presentation.kyc_phoneNumber
+package presentation.kyc_cardInfo
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,18 +21,16 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import core.designSystem.components.AppBar
-import core.designSystem.components.CustomErrorDialog
+import core.designSystem.components.CardNumberSection
+import core.designSystem.components.CardPasswordSection
 import core.designSystem.components.FinaxisButton
-import core.designSystem.components.PhoneNumberSection
-import core.designSystem.helper.PhoneNumberState
-import core.extensions.isValidNumber
-import core.network.utils.RequestState.Error
-import core.network.utils.RequestState.Success
+import core.designSystem.helper.CardNumberState
+import core.designSystem.helper.CardPasswordState
 import core.sharedPlatform.PlatformColors
 import finaxis.composeapp.generated.resources.Res.font
 import finaxis.composeapp.generated.resources.Res.string
-import finaxis.composeapp.generated.resources.kyc_second_step_description
-import finaxis.composeapp.generated.resources.kyc_second_step_title
+import finaxis.composeapp.generated.resources.kyc_fourth_step_description
+import finaxis.composeapp.generated.resources.kyc_fourth_step_title
 import finaxis.composeapp.generated.resources.poppins_regular
 import finaxis.composeapp.generated.resources.poppins_semibold
 import org.jetbrains.compose.resources.Font
@@ -42,16 +40,16 @@ import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun PhoneNumberKycScreen(onBackPressed: () -> Unit, onProceed: () -> Unit) {
+fun CardInfoKyc(onBackPressed: () -> Unit, onProceed: () -> Unit) {
     PlatformColors(
         statusBarColor = MaterialTheme.colorScheme.onBackground,
         navBarColor = MaterialTheme.colorScheme.onBackground
     )
-    var phoneNumberState by remember { mutableStateOf(PhoneNumberState()) }
-    val viewModel = koinViewModel<PhoneNumberKycViewModel>()
-    val submitPhoneNumber by viewModel.phoneNumberState.collectAsState()
+    var cardNumberState by remember { mutableStateOf(CardNumberState()) }
+    var cardPasswordState by remember { mutableStateOf(CardPasswordState()) }
+    val viewModel = koinViewModel<CardInfoKycViewModel>()
+    val cardInfoState by viewModel.cardInfoState.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
-
     Scaffold(
         topBar = { AppBar(modifier = Modifier.fillMaxWidth()) { onBackPressed() } }
     ) { paddingValues ->
@@ -70,61 +68,41 @@ fun PhoneNumberKycScreen(onBackPressed: () -> Unit, onProceed: () -> Unit) {
                     .weight(1f)
             ) {
                 Text(
-                    text = stringResource(resource = string.kyc_second_step_title),
+                    text = stringResource(resource = string.kyc_fourth_step_title),
                     style = MaterialTheme.typography.titleLarge.copy(fontFamily = FontFamily(Font(font.poppins_semibold))),
                     color = MaterialTheme.colorScheme.inversePrimary,
                     fontSize = 30.sp
                 )
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = stringResource(string.kyc_second_step_description),
+                    text = stringResource(string.kyc_fourth_step_description),
                     style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily(Font(font.poppins_regular))),
                     color = MaterialTheme.colorScheme.inversePrimary
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-                PhoneNumberSection(
-                    phoneNumberState = phoneNumberState,
-                    onPhoneNumberChange = { newPhoneNumber ->
-                        phoneNumberState = phoneNumberState.copy(phoneNumber = newPhoneNumber)
-                    }
-                )
+                CardNumberSection(cardNumberState = cardNumberState, onCardNumberChange = {
+                    cardNumberState = cardNumberState.copy(cardNumber = it)
+                })
+                Spacer(modifier = Modifier.height(15.dp))
+                CardPasswordSection(cardPasswordState = cardPasswordState, onCardPasswordChange = {
+                    cardPasswordState = cardPasswordState.copy(cardPassword = it)
+                })
             }
             FinaxisButton(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 onClick = {
-                    viewModel.setPhoneNumber(phoneNumberState.phoneNumber)
+
                 },
                 buttonText = "Proceed",
-                isClickable = phoneNumberState.phoneNumber.isValidNumber(),
-                isLoading = submitPhoneNumber.isLoading()
+                isClickable = areInputsComplete(cardNumberState, cardPasswordState),
+                isLoading = true
             )
-            if (submitPhoneNumber.isError()) {
-                showDialog = true
-            }
-
-            when (submitPhoneNumber) {
-                is Error -> {
-                    showDialog = true
-                }
-
-                is Success -> {
-                    onProceed()
-                    viewModel.resetSubmitPhoneNumber()
-                }
-
-                else -> {}
-            }
-
-            if (showDialog) {
-                CustomErrorDialog(
-                    title = "Error",
-                    message = submitPhoneNumber.getErrorMessage(),
-                    onDismiss = {
-                        showDialog = false
-                        viewModel.resetErrorState()
-                    }
-                )
-            }
         }
     }
+}
+
+private fun areInputsComplete(cardNumberState: CardNumberState, cardPasswordState: CardPasswordState): Boolean {
+    val isCardNumberComplete = cardNumberState.cardNumber.length == 19
+    val isCardPasswordComplete = cardPasswordState.cardPassword.length == 4
+    return isCardNumberComplete && isCardPasswordComplete
 }
