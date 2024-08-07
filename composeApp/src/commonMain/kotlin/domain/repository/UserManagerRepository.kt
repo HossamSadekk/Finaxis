@@ -5,4 +5,8 @@ interface UserManagerRepository {
     suspend fun isUserLoggedIn(): Boolean
     suspend fun saveUserToken(token: String)
     suspend fun getUserToken(): String
+    suspend fun userHasAccount(isAccountCreated: Boolean)
+    suspend fun isUserHasAccount(): Boolean
+    suspend fun saveUserPasscode(passcode: String)
+    suspend fun getUserPasscode(): String
 }

@@ -19,12 +19,10 @@ class CardNumberMask(
         separator: String,
         displayOnlyLastFourDigits: Boolean,
     ): TransformedText {
-        // format: XXXX XXXX XXXX XXXX by default
-        val trimmed =
-            if (text.text.length >= 16) text.text.substring(0..15) else text.text
+        val trimmed = text.text.filter { it.isDigit() }.take(16)
         var out = ""
         for (i in trimmed.indices) {
-            out += if (displayOnlyLastFourDigits && i !in 12..16) digitMask else trimmed[i]
+            out += if (displayOnlyLastFourDigits && i !in 12..15) digitMask else trimmed[i]
             if (i == 3 || i == 7 || i == 11) out += separator
         }
 
@@ -34,7 +32,7 @@ class CardNumberMask(
                     offset <= 3 -> offset
                     offset <= 7 -> offset + 1
                     offset <= 11 -> offset + 2
-                    offset <= 16 -> offset + 3
+                    offset <= 15 -> offset + 3
                     else -> 19
                 }
             }

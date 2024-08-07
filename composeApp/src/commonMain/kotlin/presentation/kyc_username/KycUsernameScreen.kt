@@ -86,16 +86,17 @@ fun KycUsernameScreen(onBackPressed: () -> Unit, onProceedClicked: () -> Unit) {
                     usernameState = usernameState,
                     onUsernameChange = { newUsername -> usernameState = usernameState.copy(username = newUsername) })
             }
+            FinaxisButton(
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+                onClick = {
+                    viewModel.setUsername(usernameState.username)
+                },
+                buttonText = "Proceed",
+                isClickable = usernameState.username.isValidKycUsername(),
+                isLoading = state.isLoading()
+            )
         }
-        FinaxisButton(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            onClick = {
-                viewModel.setUsername(usernameState.username)
-            },
-            buttonText = "Proceed",
-            isClickable = usernameState.username.isValidKycUsername(),
-            isLoading = state.isLoading()
-        )
+
         if (state.isError()) {
             showDialog = true
         }
@@ -124,4 +125,4 @@ fun KycUsernameScreen(onBackPressed: () -> Unit, onProceedClicked: () -> Unit) {
             )
         }
     }
-}
+}//1234-5478-9312-3026

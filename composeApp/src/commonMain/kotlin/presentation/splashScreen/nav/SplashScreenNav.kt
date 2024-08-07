@@ -16,5 +16,5 @@ fun NavGraphBuilder.splashScreen(onNavigation: (SplashScreenDest) -> Unit) {
 
 enum class SplashScreenDest {
     WELCOME_SCREEN,
-    KYC_INTRO
+    PASSCODE
 }

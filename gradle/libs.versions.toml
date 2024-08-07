@@ -17,7 +17,7 @@ junit = "4.13.2"
 koinCore = "3.2.2"
 kotlin = "2.0.0"
 # navigation
-navigation = "2.8.0-alpha02"
+navigation = "2.7.0-alpha07"
 # logger
 napierVersion = "2.7.1"
 # DI

@@ -6,11 +6,15 @@ import core.network.utils.RequestState
 import core.network.utils.RequestState.Idle
 import data.model.AccountResponse
 import domain.usecase.apiUseCases.SetCardInfoKYCUseCase
+import domain.usecase.localUseCases.SetUserHasAccountUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class CardInfoKycViewModel(private val setCardInfoKYCUseCase: SetCardInfoKYCUseCase) : BaseViewModel() {
+class CardInfoKycViewModel(
+    private val setCardInfoKYCUseCase: SetCardInfoKYCUseCase,
+    private val setUserHasAccountUseCase: SetUserHasAccountUseCase,
+) : BaseViewModel() {
     private val _cardInfoState = MutableStateFlow<RequestState<AccountResponse>>(Idle)
     val cardInfoState: StateFlow<RequestState<AccountResponse>> get() = _cardInfoState
 
@@ -31,4 +35,11 @@ class CardInfoKycViewModel(private val setCardInfoKYCUseCase: SetCardInfoKYCUseC
         })
     }
 
+    fun setUserAccountCreated() = safeLaunch {
+        setUserHasAccountUseCase.execute(true)
+    }
+
+    fun resetCardInfoState() {
+        _cardInfoState.value = Idle
+    }
 }

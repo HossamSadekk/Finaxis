@@ -31,6 +31,7 @@ import core.designSystem.components.NumberPad
 import core.designSystem.components.PasscodeView
 import core.network.utils.RequestState
 import core.sharedPlatform.PlatformColors
+import core.sharedPlatform.showToast
 import core.utils.PASSCODE_LENGTH
 import data.model.RegisterRequest
 import finaxis.composeapp.generated.resources.Res.font
@@ -38,10 +39,18 @@ import finaxis.composeapp.generated.resources.poppins_medium
 import org.jetbrains.compose.resources.Font
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
+import presentation.passcode.nav.PasscodeScreenDest
+import presentation.passcode.nav.PasscodeScreenDest.HomeScreen
+import presentation.passcode.nav.PasscodeScreenDest.KYC
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
-fun PasscodeScreen(phoneNumber: String?, username: String?, onBackPressed: () -> Unit, onPasscodeSuccess: () -> Unit) {
+fun PasscodeScreen(
+    phoneNumber: String?,
+    username: String?,
+    onBackPressed: () -> Unit,
+    onPasscodeSuccess: (PasscodeScreenDest) -> Unit,
+) {
     PlatformColors(
         statusBarColor = MaterialTheme.colorScheme.background,
         navBarColor = MaterialTheme.colorScheme.background
@@ -52,27 +61,44 @@ fun PasscodeScreen(phoneNumber: String?, username: String?, onBackPressed: () ->
     var showDialog by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
     val state by viewModel.tokenState.collectAsState()
+    val isLoggedIn by viewModel.isLoggedIn.collectAsState()
+    val isUserHasAccount by viewModel.isUserHasAccount.collectAsState()
+    val userPasscode by viewModel.passcode.collectAsState()
 
     LoaderWithOffset(
         isLoading = isLoading,
         offset = 50
     ) {
         Scaffold(
-            topBar = { AppBar(modifier = Modifier.fillMaxWidth()) { onBackPressed() } }
+            topBar = {
+                AppBar(modifier = Modifier.fillMaxWidth()) { onBackPressed() }
+            }
         ) { paddingValues ->
             PasscodeContent(modifier = Modifier.padding(paddingValues), passcode,
                 onNumberClick = {
                     if (passcode.length < PASSCODE_LENGTH) {
                         passcode += it
                         if (passcode.length == PASSCODE_LENGTH) {
-                            viewModel.registerUser(
-                                registerRequest = RegisterRequest(
-                                    username.orEmpty(),
-                                    phoneNumber.orEmpty(),
-                                    passcode
-                                )
-                            )
+                            when {
+                                isLoggedIn -> {
+                                    if (passcode == userPasscode) {
+                                        onPasscodeSuccess(if (isUserHasAccount) HomeScreen else KYC)
+                                    } else {
+                                        showToast("Passcode Is Wrong")
+                                    }
+                                }
+                                else -> {
+                                    viewModel.registerUser(
+                                        registerRequest = RegisterRequest(
+                                            username.orEmpty(),
+                                            phoneNumber.orEmpty(),
+                                            passcode
+                                        )
+                                    )
+                                }
+                            }
                         }
+
                     }
                 }, onDeleteAction = {
                     if (passcode.isNotEmpty()) {
@@ -91,8 +117,11 @@ fun PasscodeScreen(phoneNumber: String?, username: String?, onBackPressed: () ->
                 is RequestState.Success -> {
                     isLoading = false
                     val response = (state as RequestState.Success).data
-                    viewModel.cacheUserLoginState(token = response.token)
-                    onPasscodeSuccess()
+                    viewModel.apply {
+                        cacheUserLoginState(token = response.token)
+                        saveUserPasscode(passcode)
+                    }
+                    onPasscodeSuccess(KYC)
                 }
 
                 is RequestState.Error -> {

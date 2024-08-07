@@ -14,3 +14,13 @@ fun String.isValidKycUsername(minLength: Int = 3, maxLength: Int = 15): Boolean 
     val trimmedUsername = this.trim()
     return trimmedUsername.length in minLength..maxLength && trimmedUsername.all { it.isLetterOrDigit() }
 }
+
+fun String.isCreditCardFormatted(): Boolean {
+    val expectedLength = 16
+    val expectedPattern = Regex("""\d{4}-\d{4}-\d{4}-\d{4}""")
+    return this.length == expectedLength
+}
+
+fun String.isCreditCardPassword(): Boolean {
+    return this.length == 4
+}

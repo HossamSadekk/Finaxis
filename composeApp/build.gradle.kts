@@ -70,6 +70,7 @@ kotlin {
             implementation(libs.kottie)
             // image loader
             implementation(libs.image.loader)
+            //
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

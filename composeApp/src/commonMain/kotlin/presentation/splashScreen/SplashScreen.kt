@@ -34,7 +34,7 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
 import presentation.splashScreen.nav.SplashScreenDest
-import presentation.splashScreen.nav.SplashScreenDest.KYC_INTRO
+import presentation.splashScreen.nav.SplashScreenDest.PASSCODE
 import presentation.splashScreen.nav.SplashScreenDest.WELCOME_SCREEN
 
 @OptIn(KoinExperimentalAPI::class)
@@ -42,6 +42,7 @@ import presentation.splashScreen.nav.SplashScreenDest.WELCOME_SCREEN
 fun SplashScreen(onNavigation: (SplashScreenDest) -> Unit) {
     val viewModel = koinViewModel<SplashViewModel>()
     val isLoggedIn by viewModel.isLoggedIn.collectAsState()
+    val isUserHasAccount by viewModel.isUserHasAccount.collectAsState()
 
     val scaleAnimationDuration = 1000 // Duration of the scale up and down animation
     val initialDelay = 1000 // Initial delay before starting the animation
@@ -62,10 +63,9 @@ fun SplashScreen(onNavigation: (SplashScreenDest) -> Unit) {
         startAnimation = false // Start scaling down
         // Delay for the final size before calling onSplashEnd
         delay(delayBeforeEnd.toLong())
-        if (isLoggedIn) {
-            onNavigation(KYC_INTRO)
-        } else {
-            onNavigation(WELCOME_SCREEN)
+        when {
+            isLoggedIn -> onNavigation(PASSCODE)
+            else -> onNavigation(WELCOME_SCREEN)
         }
     }
 

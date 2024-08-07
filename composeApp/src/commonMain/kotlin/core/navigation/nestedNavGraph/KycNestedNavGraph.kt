@@ -14,6 +14,7 @@ import presentation.kyc_phoneNumber.nav.navigateToPhoneNumberKycScreen
 import presentation.kyc_phoneNumber.nav.phoneNumberKycScreen
 import presentation.kyc_username.nav.kycUsernameScreen
 import presentation.kyc_username.nav.navigateToKycUsernameScreen
+import presentation.welcomeScreen.nav.welcomeScreenRoute
 
 fun NavGraphBuilder.kyaNavGraph(navController: NavController) {
     navigation(startDestination = KycIntroScreenRoute, route = KycScreenRoute) {
@@ -35,11 +36,11 @@ fun NavGraphBuilder.kyaNavGraph(navController: NavController) {
         }, onProceedClicked = {
             navController.navigateToCardInfoKyc()
         })
-//        cardInfoKycScreen(onBackPressed = {
-//            navController.navigateUp()
-//        }, onProceedClicked = {
-//
-//        })
+        cardInfoKycScreen(onBackPressed = {
+            navController.navigateUp()
+        }, onProceedClicked = {
+            navController.navigateToHomeNavGraph(welcomeScreenRoute)
+        })
     }
 }
 

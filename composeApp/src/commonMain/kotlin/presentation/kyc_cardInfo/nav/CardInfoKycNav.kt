@@ -2,13 +2,13 @@ package presentation.kyc_cardInfo.nav
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import core.navigation.transitionNavigation.slideComposable
+import androidx.navigation.compose.composable
 import presentation.kyc_cardInfo.CardInfoKyc
 
-const val cardInfoKycRoute = "cardInfoKyccreen"
+const val cardInfoKycRoute = "cardInfoKyScreen"
 
 fun NavGraphBuilder.cardInfoKycScreen(onBackPressed: () -> Unit, onProceedClicked: () -> Unit) {
-    slideComposable(route = cardInfoKycRoute) {
+    composable(route = cardInfoKycRoute) {
         CardInfoKyc(onBackPressed = { onBackPressed() }, onProceed = { onProceedClicked() })
     }
 }

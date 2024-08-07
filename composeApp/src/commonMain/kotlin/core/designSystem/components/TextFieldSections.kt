@@ -262,7 +262,9 @@ fun EnterCardNumber(
             TextField(
                 value = state.cardNumber,
                 onValueChange = { newValue ->
-                    onCardNumberChange(newValue)
+                    if (newValue.filter { it.isDigit() }.length <= 16) {
+                        onCardNumberChange(newValue)
+                    }
                 },
                 placeholder = {
                     Text(

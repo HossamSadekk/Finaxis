@@ -23,9 +23,15 @@ import androidx.compose.ui.unit.sp
 import core.designSystem.components.AppBar
 import core.designSystem.components.CardNumberSection
 import core.designSystem.components.CardPasswordSection
+import core.designSystem.components.CustomErrorDialog
 import core.designSystem.components.FinaxisButton
+import core.designSystem.components.SuccessBottomSheet
 import core.designSystem.helper.CardNumberState
 import core.designSystem.helper.CardPasswordState
+import core.extensions.isCreditCardFormatted
+import core.extensions.isCreditCardPassword
+import core.network.utils.RequestState.Error
+import core.network.utils.RequestState.Success
 import core.sharedPlatform.PlatformColors
 import finaxis.composeapp.generated.resources.Res.font
 import finaxis.composeapp.generated.resources.Res.string
@@ -50,6 +56,8 @@ fun CardInfoKyc(onBackPressed: () -> Unit, onProceed: () -> Unit) {
     val viewModel = koinViewModel<CardInfoKycViewModel>()
     val cardInfoState by viewModel.cardInfoState.collectAsState()
     var showDialog by remember { mutableStateOf(false) }
+    var showSheet by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = { AppBar(modifier = Modifier.fillMaxWidth()) { onBackPressed() } }
     ) { paddingValues ->
@@ -89,14 +97,52 @@ fun CardInfoKyc(onBackPressed: () -> Unit, onProceed: () -> Unit) {
                 })
             }
             FinaxisButton(
-                modifier = Modifier.padding(horizontal = 16.dp),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
                 onClick = {
-
+                    viewModel.submitCardInfo(
+                        cardNumber = cardNumberState.cardNumber,
+                        cardPassword = cardPasswordState.cardPassword
+                    )
                 },
                 buttonText = "Proceed",
-                isClickable = areInputsComplete(cardNumberState, cardPasswordState),
-                isLoading = true
+                isClickable = cardNumberState.cardNumber.isCreditCardFormatted() && cardPasswordState.cardPassword.isCreditCardPassword(),
+                isLoading = cardInfoState.isLoading()
             )
+
+            if (cardInfoState.isError()) {
+                showDialog = true
+            }
+
+            when (cardInfoState) {
+                is Error -> {
+                    showDialog = true
+                }
+
+                is Success -> {
+                    showSheet = true
+                    viewModel.setUserAccountCreated()
+                    viewModel.resetCardInfoState()
+                }
+
+                else -> {}
+            }
+
+            if (showDialog) {
+                CustomErrorDialog(
+                    title = "Error",
+                    message = cardInfoState.getErrorMessage(),
+                    onDismiss = {
+                        showDialog = false
+                        viewModel.resetCardInfoState()
+                    }
+                )
+            }
+            if (showSheet) {
+                SuccessBottomSheet {
+                    showSheet = false
+                    onProceed()
+                }
+            }
         }
     }
 }
@@ -106,3 +152,4 @@ private fun areInputsComplete(cardNumberState: CardNumberState, cardPasswordStat
     val isCardPasswordComplete = cardPasswordState.cardPassword.length == 4
     return isCardNumberComplete && isCardPasswordComplete
 }
+

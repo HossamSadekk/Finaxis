@@ -90,7 +90,7 @@ fun PhoneNumberKycScreen(onBackPressed: () -> Unit, onProceed: () -> Unit) {
                 )
             }
             FinaxisButton(
-                modifier = Modifier.padding(horizontal = 16.dp),
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
                 onClick = {
                     viewModel.setPhoneNumber(phoneNumberState.phoneNumber)
                 },
