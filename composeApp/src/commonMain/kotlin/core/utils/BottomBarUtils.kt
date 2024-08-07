@@ -26,7 +26,7 @@ import presentation.settings.nav.settingsScreenRoute
 // Define the tabs
 sealed class BottomBarTab(val title: String, val icon: ImageVector, val color: Color, val route: String) {
     data object Profile : BottomBarTab(
-        title = "Transactions",
+        title = "Transaction",
         icon = Icons.Rounded.Person,
         color = Color(0xFFFFA574),
         route = ""

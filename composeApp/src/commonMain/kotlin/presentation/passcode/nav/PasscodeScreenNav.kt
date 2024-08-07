@@ -12,7 +12,9 @@ const val passcodeScreenRoute = "passcode/{phoneNumber}/{username}"
 fun NavGraphBuilder.passcodeScreen(onBackPressed: () -> Unit, onPasscodeSuccess: (PasscodeScreenDest) -> Unit) {
     composable(route = passcodeScreenRoute) {
         val phoneNumber = it.arguments?.getString("phoneNumber")
-        val username = it.arguments?.getString("username")
+        val username = it.arguments?.getString("username").takeIf { param ->
+            param != "null"
+        }
         PasscodeScreen(
             phoneNumber = phoneNumber,
             username = username,

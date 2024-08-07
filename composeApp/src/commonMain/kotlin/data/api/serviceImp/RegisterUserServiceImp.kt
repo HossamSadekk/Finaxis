@@ -7,11 +7,10 @@ import data.api.RegisterUserService
 import data.model.RegisterRequest
 import data.model.TokenResponse
 import io.ktor.client.HttpClient
-import kotlinx.coroutines.flow.Flow
 
 class RegisterUserServiceImp(private val httpClient: HttpClient) : RegisterUserService {
     override suspend fun registerUser(registerRequest: RegisterRequest): ApiResponse<TokenResponse> =
-        httpClient.postRequest<TokenResponse>(
+        httpClient.postRequest(
             path = REGISTER,
             requestBody = registerRequest
         )

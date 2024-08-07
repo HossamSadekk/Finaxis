@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import core.designSystem.components.AppBar
-import core.designSystem.components.FinaxisButton
+import core.designSystem.components.FinaxisWideButton
 import core.designSystem.components.PhoneNumberSection
 import core.designSystem.helper.PhoneNumberState
 import core.sharedPlatform.PlatformColors
@@ -34,14 +34,12 @@ import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun SignInScreen(onBackPressed: () -> Unit) {
+fun SignInScreen(onBackPressed: () -> Unit, onProceedClicked: (String) -> Unit) {
     PlatformColors(
         statusBarColor = MaterialTheme.colorScheme.onBackground,
         navBarColor = MaterialTheme.colorScheme.onBackground
     )
     var phoneNumberState by remember { mutableStateOf(PhoneNumberState()) }
-    var isLoading by remember { mutableStateOf(false) }
-    var isClickable by remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = { AppBar(modifier = Modifier.fillMaxWidth()) { onBackPressed() } }
@@ -80,14 +78,12 @@ fun SignInScreen(onBackPressed: () -> Unit) {
                     }
                 )
             }
-            FinaxisButton(
+            FinaxisWideButton(
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp),
                 onClick = {
-                    isLoading = true
+                    onProceedClicked(phoneNumberState.phoneNumber)
                 },
                 buttonText = "Submit",
-                isClickable = isClickable,
-                isLoading = isLoading
             )
         }
     }

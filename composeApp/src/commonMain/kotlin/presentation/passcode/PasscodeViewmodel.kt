@@ -2,8 +2,10 @@ package presentation.passcode
 
 import core.base.viewmodel.BaseViewModel
 import core.network.utils.RequestState
+import data.model.LoginRequest
 import data.model.RegisterRequest
 import data.model.TokenResponse
+import domain.usecase.apiUseCases.LoginUserUseCase
 import domain.usecase.apiUseCases.RegisterUserUseCase
 import domain.usecase.localUseCases.GetUserLoggedInUseCase
 import domain.usecase.localUseCases.GetUserPasscodeUseCase
@@ -11,6 +13,7 @@ import domain.usecase.localUseCases.IsUserHasAccountUseCase
 import domain.usecase.localUseCases.SaveUserLoggedInUseCase
 import domain.usecase.localUseCases.SaveUserPasscodeUseCase
 import domain.usecase.localUseCases.SaveUserTokenUseCase
+import domain.usecase.localUseCases.SetUserHasAccountUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -23,7 +26,9 @@ class PasscodeViewmodel(
     private val getUserLoggedInUseCase: GetUserLoggedInUseCase,
     private val isUserHasAccountUseCase: IsUserHasAccountUseCase,
     private val getUserPasscodeUseCase: GetUserPasscodeUseCase,
-    ) : BaseViewModel() {
+    private val loginUserUseCase: LoginUserUseCase,
+    private val setUserHasAccountUseCase: SetUserHasAccountUseCase,
+) : BaseViewModel() {
     private val _tokenState = MutableStateFlow<RequestState<TokenResponse>>(RequestState.Idle)
     val tokenState: StateFlow<RequestState<TokenResponse>> get() = _tokenState
 
@@ -35,6 +40,7 @@ class PasscodeViewmodel(
 
     private val _passcode = MutableStateFlow("")
     val passcode: StateFlow<String> get() = _passcode
+
     init {
         safeLaunch {
             _isLoggedIn.value = getUserLoggedInUseCase.execute()
@@ -54,6 +60,16 @@ class PasscodeViewmodel(
             }
         )
 
+    fun loginUser(loginRequest: LoginRequest) =
+        executeUseCase(block = { loginUserUseCase.execute(loginRequest) },
+            onStart = {
+                _tokenState.update { RequestState.Loading }
+            }, onError = { error ->
+                _tokenState.update { RequestState.Error(error) }
+            }, onSuccess = { response ->
+                _tokenState.update { RequestState.Success(response) }
+            })
+
     fun cacheUserLoginState(token: String) =
         safeLaunch {
             saveUserTokenUseCase.execute(token)
@@ -66,5 +82,9 @@ class PasscodeViewmodel(
 
     fun resetErrorState() {
         _tokenState.value = RequestState.Idle
+    }
+
+    fun setUserHasAccount() = safeLaunch {
+        setUserHasAccountUseCase.execute(true)
     }
 }

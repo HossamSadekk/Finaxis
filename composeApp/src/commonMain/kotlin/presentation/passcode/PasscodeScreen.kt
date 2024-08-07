@@ -33,6 +33,7 @@ import core.network.utils.RequestState
 import core.sharedPlatform.PlatformColors
 import core.sharedPlatform.showToast
 import core.utils.PASSCODE_LENGTH
+import data.model.LoginRequest
 import data.model.RegisterRequest
 import finaxis.composeapp.generated.resources.Res.font
 import finaxis.composeapp.generated.resources.poppins_medium
@@ -80,22 +81,15 @@ fun PasscodeScreen(
                         passcode += it
                         if (passcode.length == PASSCODE_LENGTH) {
                             when {
-                                isLoggedIn -> {
-                                    if (passcode == userPasscode) {
-                                        onPasscodeSuccess(if (isUserHasAccount) HomeScreen else KYC)
-                                    } else {
-                                        showToast("Passcode Is Wrong")
-                                    }
+                                isLoggedIn -> handleLoggedInUser(
+                                    passcode,
+                                    userPasscode,
+                                    isUserHasAccount
+                                ) { destination ->
+                                    onPasscodeSuccess(destination)
                                 }
-                                else -> {
-                                    viewModel.registerUser(
-                                        registerRequest = RegisterRequest(
-                                            username.orEmpty(),
-                                            phoneNumber.orEmpty(),
-                                            passcode
-                                        )
-                                    )
-                                }
+
+                                else -> handleUserRegistrationOrLogin(username, phoneNumber, passcode, viewModel)
                             }
                         }
 
@@ -121,7 +115,12 @@ fun PasscodeScreen(
                         cacheUserLoginState(token = response.token)
                         saveUserPasscode(passcode)
                     }
-                    onPasscodeSuccess(KYC)
+                    if(username != null && phoneNumber != null){
+                        onPasscodeSuccess(KYC)
+                    }else{
+                        viewModel.setUserHasAccount()
+                        onPasscodeSuccess(HomeScreen)
+                    }
                 }
 
                 is RequestState.Error -> {
@@ -185,5 +184,43 @@ fun PasscodeContent(modifier: Modifier, passcode: String, onNumberClick: (String
             },
             modifier = Modifier.fillMaxWidth()
         )
+    }
+}
+
+private fun handleLoggedInUser(
+    passcode: String,
+    userPasscode: String,
+    hasAccount: Boolean,
+    onPasscodeSuccess: (PasscodeScreenDest) -> Unit,
+) {
+    if (passcode == userPasscode) {
+        val destination = if (hasAccount) HomeScreen else KYC
+        onPasscodeSuccess(destination)
+    } else {
+        showToast("Passcode Is Wrong")
+    }
+}
+
+// Function to handle registration or login based on provided details
+private fun handleUserRegistrationOrLogin(
+    username: String?,
+    phoneNumber: String?,
+    passcode: String,
+    viewmodel: PasscodeViewmodel,
+) {
+    when {
+        !username.isNullOrEmpty() && !phoneNumber.isNullOrEmpty() -> {
+            // Perform registration
+            viewmodel.registerUser(
+                registerRequest = RegisterRequest(username, phoneNumber, passcode)
+            )
+        }
+
+        else -> {
+            // Perform login
+            viewmodel.loginUser(
+                loginRequest = LoginRequest(phoneNumber!!, passcode)
+            )
+        }
     }
 }

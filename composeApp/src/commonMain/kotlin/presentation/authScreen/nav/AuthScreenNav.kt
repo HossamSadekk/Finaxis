@@ -19,11 +19,11 @@ fun NavGraphBuilder.signUpScreen(onBackPressed: () -> Unit, onNextPressed: (Stri
     }
 }
 
-fun NavGraphBuilder.signInScreen(onBackPressed: () -> Unit) {
+fun NavGraphBuilder.signInScreen(onBackPressed: () -> Unit, onProceedClicked: (String) -> Unit) {
     slideComposable(route = signInScreenRoute) {
-        SignInScreen {
-            onBackPressed()
-        }
+        SignInScreen(onBackPressed = { onBackPressed() }, onProceedClicked = {
+            onProceedClicked(it)
+        })
     }
 }
 

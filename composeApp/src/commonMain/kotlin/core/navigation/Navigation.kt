@@ -83,9 +83,9 @@ fun MainNavigation(
             }, onNextPressed = { phoneNumber, userName ->
                 navController.navigateToPasscode(phoneNumber, userName, false)
             })
-            signInScreen {
-                navController.navigateUp()
-            }
+            signInScreen(
+                onBackPressed = { navController.navigateUp() },
+                onProceedClicked = { navController.navigateToPasscode(phoneNumber = it, fromSplashScreen = false) })
             passcodeScreen(
                 onBackPressed = { navController.navigateUp() },
                 onPasscodeSuccess = { destination ->

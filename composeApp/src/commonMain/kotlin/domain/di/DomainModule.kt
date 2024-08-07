@@ -1,6 +1,7 @@
 package domain.di
 
 import domain.usecase.apiUseCases.GetBanksUseCase
+import domain.usecase.apiUseCases.LoginUserUseCase
 import domain.usecase.apiUseCases.RegisterUserUseCase
 import domain.usecase.apiUseCases.SelectBankUseCase
 import domain.usecase.apiUseCases.SetCardInfoKYCUseCase
@@ -32,4 +33,5 @@ val domainModule = module {
     singleOf(::IsUserHasAccountUseCase)
     singleOf(::SaveUserPasscodeUseCase)
     singleOf(::GetUserPasscodeUseCase)
+    singleOf(::LoginUserUseCase)
 }
