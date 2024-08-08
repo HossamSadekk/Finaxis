@@ -6,13 +6,19 @@ object Rout {
 }
 
 object Endpoints {
+    // AUTH
     const val REGISTER = "auth/register"
     const val LOGIN = "auth/login"
+    // BANK
     const val BANK = "api/banks"
+    // KYC
     const val KYC_SELECT_BANK = "api/kyc/select-bank"
     const val KYC_PHONE_NUMBER = "api/kyc/phone-number"
     const val KYC_USERNAME = "api/kyc/submit-username"
     const val KYC_CARD_INFO = "api/kyc/submit-card"
+    // ACCOUNT
+    const val ACCOUNT_DETAILS = "api/me"
+
 }
 
 object Parameters {

@@ -1,9 +1,8 @@
-package presentation.Home.nav
+package presentation.home.nav
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import core.navigation.transitionNavigation.slideComposable
-import presentation.Home.HomeScreen
+import presentation.home.HomeScreen
 
 const val homeScreenRoute = "HomeScreen"
 fun NavGraphBuilder.homeScreen() {

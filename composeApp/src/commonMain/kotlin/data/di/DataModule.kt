@@ -1,18 +1,22 @@
 package data.di
 
+import data.api.AccountUserService
 import data.api.BankService
 import data.api.KycService
 import data.api.LoginUserService
 import data.api.RegisterUserService
+import data.api.serviceImp.AccountUserServiceImp
 import data.api.serviceImp.BankServiceImp
 import data.api.serviceImp.KycServiceImp
 import data.api.serviceImp.LoginServiceImp
 import data.api.serviceImp.RegisterUserServiceImp
+import data.repository.AccountRepositoryImp
 import data.repository.BankRepositoryImp
 import data.repository.KycRepositoryImp
 import data.repository.LoginRepositoryImp
 import data.repository.RegisterUserRepositoryImp
 import data.repository.UserManagerRepositoryImp
+import domain.repository.AccountRepository
 import domain.repository.BankRepository
 import domain.repository.KycRepository
 import domain.repository.LoginRepository
@@ -25,6 +29,7 @@ val serviceModule = module {
     single<BankService> { BankServiceImp(get()) }
     single<KycService> { KycServiceImp(get()) }
     single<LoginUserService> { LoginServiceImp(get()) }
+    single<AccountUserService> { AccountUserServiceImp(get()) }
 }
 
 val repositoryModule = module {
@@ -33,6 +38,7 @@ val repositoryModule = module {
     single<BankRepository> { BankRepositoryImp(get()) }
     single<KycRepository> { KycRepositoryImp(get()) }
     single<LoginRepository> { LoginRepositoryImp(get()) }
+    single<AccountRepository> { AccountRepositoryImp(get()) }
 }
 
 val dataModule = module {

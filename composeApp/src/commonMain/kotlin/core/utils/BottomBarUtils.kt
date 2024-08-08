@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import presentation.Home.nav.homeScreenRoute
+import presentation.home.nav.homeScreenRoute
 import presentation.MoneyRequests.nav.moneyRequestsScreenRoute
 import presentation.settings.nav.settingsScreenRoute
 

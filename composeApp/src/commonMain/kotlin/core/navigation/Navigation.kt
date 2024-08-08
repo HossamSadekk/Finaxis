@@ -7,12 +7,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import core.navigation.nestedNavGraph.HomeRouteRoute
 import core.navigation.nestedNavGraph.homeNavGraph
 import core.navigation.nestedNavGraph.kyaNavGraph
 import core.navigation.nestedNavGraph.navigateToHomeNavGraph
 import core.navigation.nestedNavGraph.navigateToKycNavGraph
 import core.utils.BottomBar
-import presentation.Home.nav.homeScreenRoute
+import presentation.home.nav.homeScreenRoute
 import presentation.MoneyRequests.nav.moneyRequestsScreenRoute
 import presentation.authScreen.nav.navigateToSignInpScreen
 import presentation.authScreen.nav.navigateToSignUpScreen
@@ -27,7 +28,6 @@ import presentation.settings.nav.settingsScreenRoute
 import presentation.splashScreen.nav.SplashScreenDest.PASSCODE
 import presentation.splashScreen.nav.SplashScreenDest.WELCOME_SCREEN
 import presentation.splashScreen.nav.splashScreen
-import presentation.splashScreen.nav.splashScreenRoute
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_IN
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_UP
 import presentation.welcomeScreen.nav.navigateToWelcomeScreen
@@ -54,7 +54,7 @@ fun MainNavigation(
             }
         }
     ) {
-        NavHost(navController = navController, startDestination = splashScreenRoute) {
+        NavHost(navController = navController, startDestination = HomeRouteRoute) {
             splashScreen { destination ->
                 when (destination) {
                     WELCOME_SCREEN -> {

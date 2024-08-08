@@ -24,3 +24,7 @@ fun String.isCreditCardFormatted(): Boolean {
 fun String.isCreditCardPassword(): Boolean {
     return this.length == 4
 }
+
+fun String.formatCardNumber(): String {
+    return "**** **** **** ${this.takeLast(4)}"
+}
