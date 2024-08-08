@@ -48,6 +48,7 @@ datastore = "1.1.1"
 atomicfu = "0.23.2"
 # image loader
 image-loader-version = "1.5.3"
+coreI18n = "1.0.0-alpha01"
 
 
 [libraries]
@@ -98,6 +99,7 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 # datastore
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "atomicfu" }
+androidx-core-i18n = { group = "androidx.core", name = "core-i18n", version.ref = "coreI18n" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

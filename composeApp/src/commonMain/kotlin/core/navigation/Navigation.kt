@@ -28,6 +28,7 @@ import presentation.settings.nav.settingsScreenRoute
 import presentation.splashScreen.nav.SplashScreenDest.PASSCODE
 import presentation.splashScreen.nav.SplashScreenDest.WELCOME_SCREEN
 import presentation.splashScreen.nav.splashScreen
+import presentation.splashScreen.nav.splashScreenRoute
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_IN
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_UP
 import presentation.welcomeScreen.nav.navigateToWelcomeScreen
@@ -54,7 +55,7 @@ fun MainNavigation(
             }
         }
     ) {
-        NavHost(navController = navController, startDestination = HomeRouteRoute) {
+        NavHost(navController = navController, startDestination = splashScreenRoute) {
             splashScreen { destination ->
                 when (destination) {
                     WELCOME_SCREEN -> {
