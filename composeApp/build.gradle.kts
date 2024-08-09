@@ -71,6 +71,7 @@ kotlin {
             // image loader
             implementation(libs.image.loader)
             //
+            implementation(libs.pullRefresh)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

@@ -48,6 +48,8 @@ datastore = "1.1.1"
 atomicfu = "0.23.2"
 # image loader
 image-loader-version = "1.5.3"
+# pullrefresh
+pullrefresh = "1.3.0"
 coreI18n = "1.0.0-alpha01"
 
 
@@ -75,8 +77,9 @@ koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koinComp
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koinComposeViewModel" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 # image loader
-image-loader = {module= "io.github.qdsfdhvh:image-loader", version.ref = "image-loader-version"}
-
+image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image-loader-version" }
+# pull to refresh
+pullRefresh = { module = "dev.materii.pullrefresh:pullrefresh", version.ref = "pullrefresh" }
 
 # lottie animation
 kottie = { module = "io.github.ismai117:kottie", version.ref = "kottie" }

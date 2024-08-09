@@ -58,7 +58,7 @@ fun BankCardUi(
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .aspectRatio(bankCardAspectRatio),
+            ,
         shape = RoundedCornerShape(35.dp),
         elevation = 16.dp
     ) {

@@ -18,7 +18,7 @@ class HomeScreenViewModel(private val getAccountDetailsUseCase: GetAccountDetail
         getAccountDetails()
     }
 
-    private fun getAccountDetails() =
+    fun getAccountDetails() =
         executeUseCase(block = { getAccountDetailsUseCase.execute() },
             onStart = {
                 _accountDetails.update { RequestState.Loading }
