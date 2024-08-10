@@ -144,7 +144,11 @@ fun TransactionItem(modifier: Modifier = Modifier, transaction: Transaction, acc
     val transactionText = if (isSender) {
         "Send request to ${transaction.receiverAccount.username}"
     } else {
-        "Request from ${transaction.senderAccount.username}"
+        if(transaction.type == "TRANSFER"){
+            "Received from ${transaction.senderAccount.username}"
+        }else{
+            "Request from ${transaction.senderAccount.username}"
+        }
     }
     val formattedDate = formatDate(transaction.createdAt)
     val icon =
