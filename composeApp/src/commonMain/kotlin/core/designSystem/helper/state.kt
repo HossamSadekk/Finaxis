@@ -22,3 +22,7 @@ data class CardNumberState(
 data class CardPasswordState(
     val cardPassword: String = "",
 )
+
+data class NoteState(
+    val note: String = ""
+)

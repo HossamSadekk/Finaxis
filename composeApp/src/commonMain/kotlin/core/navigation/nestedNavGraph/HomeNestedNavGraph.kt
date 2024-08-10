@@ -3,18 +3,32 @@ package core.navigation.nestedNavGraph
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.navigation
+import presentation.MoneyRequests.nav.RequestsScreen
 import presentation.home.nav.homeScreen
 import presentation.home.nav.homeScreenRoute
-import presentation.MoneyRequests.nav.moneyRequestsScreen
+import presentation.money_request.nav.moneyProcessRequest
+import presentation.money_request.nav.navigateToMoneyRequest
 import presentation.settings.nav.settingsScreen
+import presentation.username_money_request.nav.navigateToRequestProcess
+import presentation.username_money_request.nav.requestProcessScreen
 
 const val HomeRouteRoute = "HomeRoute"
 
 fun NavGraphBuilder.homeNavGraph(navController: NavController) {
     navigation(startDestination = homeScreenRoute, route = HomeRouteRoute) {
-        homeScreen()
-        moneyRequestsScreen()
+        // bottom bar composables
+        homeScreen(onRequestProcess = {
+            navController.navigateToRequestProcess(it)
+        })
+        RequestsScreen()
         settingsScreen()
+        // other composable
+        requestProcessScreen(
+            onBackPressed = { navController.navigateUp() },
+            onProceedClicked = { request, username, note ->
+                navController.navigateToMoneyRequest(request, username, note)
+            })
+        moneyProcessRequest(onBackPressed = { navController.navigateUp() })
     }
 }
 
@@ -24,4 +38,3 @@ fun NavController.navigateToHomeNavGraph(destination: String) =
         launchSingleTop = true
     }
 
-// 1234-5478-9312-3326

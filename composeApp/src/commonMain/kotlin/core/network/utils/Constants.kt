@@ -18,6 +18,9 @@ object Endpoints {
     const val KYC_CARD_INFO = "api/kyc/submit-card"
     // ACCOUNT
     const val ACCOUNT_DETAILS = "api/me"
+    const val CHECK_USERNAME = "api/check-username"
+    const val REQUEST_DETAILS = "api/request-details"
+    const val TRANSFER_MONEY = "api/transaction/transfer"
 
 }
 
@@ -26,4 +29,8 @@ object Parameters {
     const val USERNAME = "username"
     const val CARD_NUMBER = "cardNumber"
     const val CARD_PASS = "cardPassword"
+    const val SENDER = "senderUsername"
+    const val RECEIVER = "receiverUsername"
+    const val AMOUNT = "amount"
+    const val NOTE = "note"
 }

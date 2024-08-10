@@ -39,10 +39,13 @@ import org.koin.core.annotation.KoinExperimentalAPI
 import presentation.home.components.BankCardUi
 import presentation.home.components.HomeShimmerLoading
 import presentation.home.components.TransactionItem
+import presentation.home.nav.Request
+import presentation.home.nav.Request.REQUEST_MONEY
+import presentation.home.nav.Request.SEND_MONEY
 
 @OptIn(KoinExperimentalAPI::class, ExperimentalMaterialApi::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onRequestProcess: (Request) -> Unit) {
     PlatformColors(
         statusBarColor = MaterialTheme.colorScheme.background,
         navBarColor = MaterialTheme.colorScheme.background
@@ -94,7 +97,9 @@ fun HomeScreen() {
                             totalBalance = accountDetails.balance?.let { "$it" } ?: "0",
                             cardNumber = accountDetails.cardNumber ?: "XXXX XXXX XXXX XXXX"
                         )
-                        SendAndRequestMoney()
+                        SendAndRequestMoney(onRequestProcess = {
+                            onRequestProcess(it)
+                        })
                         Spacer(modifier = Modifier.height(10.dp))
                         Text(
                             text = "Transactions",
@@ -128,7 +133,7 @@ fun HomeScreen() {
 }
 
 @Composable
-fun SendAndRequestMoney() {
+fun SendAndRequestMoney(onRequestProcess: (Request) -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -141,23 +146,9 @@ fun SendAndRequestMoney() {
                 bottom = 20.dp
             )
     ) {
-        OutlinedButton(
-            onClick = { },
-            modifier = Modifier
-                .weight(1f)
-                .height(60.dp),
-            border = BorderStroke(1.dp, MaterialTheme.colorScheme.onPrimary)
-        ) {
-            Text(
-                text = "Request Money",
-                style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily(Font(resource = font.poppins_medium))),
-                color = MaterialTheme.colorScheme.onSecondary,
-            )
-        }
-
         Button(
             onClick = {
-
+                onRequestProcess(SEND_MONEY)
             },
             modifier = Modifier
                 .weight(1f)
@@ -170,6 +161,20 @@ fun SendAndRequestMoney() {
                 text = "Send Money",
                 style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily(Font(resource = font.poppins_medium))),
                 color = MaterialTheme.colorScheme.onBackground,
+            )
+        }
+
+        OutlinedButton(
+            onClick = { onRequestProcess(REQUEST_MONEY) },
+            modifier = Modifier
+                .weight(1f)
+                .height(60.dp),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.onPrimary)
+        ) {
+            Text(
+                text = "Request Money",
+                style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily(Font(resource = font.poppins_medium))),
+                color = MaterialTheme.colorScheme.onSecondary,
             )
         }
     }

@@ -3,8 +3,10 @@ package core.designSystem.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +35,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import core.designSystem.helper.CardNumberState
 import core.designSystem.helper.CardPasswordState
+import core.designSystem.helper.NoteState
 import core.designSystem.helper.PhoneNumberState
 import core.designSystem.helper.UsernameState
 import core.utils.CardNumberMask
@@ -115,7 +118,7 @@ fun EnterPhoneNumber(
                 },
                 placeholder = {
                     Text(
-                        text = stringResource(string.phone_number), // Update with the appropriate string resource ID
+                        text = stringResource(string.phone_number),
                         style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily(Font(font.poppins_light)))
                     )
                 },
@@ -178,7 +181,7 @@ fun EnterUsername(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = Icons.Default.Person, // Replace with an appropriate username icon if you have one
+                imageVector = Icons.Default.Person,
                 contentDescription = "Username icon",
                 modifier = Modifier.size(24.dp)
             )
@@ -188,7 +191,7 @@ fun EnterUsername(
                 onValueChange = onUsernameChange,
                 placeholder = {
                     Text(
-                        text = stringResource(resource = string.username), // Update with the appropriate string resource ID
+                        text = stringResource(resource = string.username),
                         style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily(Font(font.poppins_light)))
                     )
                 },
@@ -219,7 +222,7 @@ fun CardNumberSection(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = stringResource(string.cardNumber), // Update with the appropriate string resource ID
+            text = stringResource(string.cardNumber),
             color = MaterialTheme.colorScheme.inversePrimary,
             style = MaterialTheme.typography.bodyMedium
         )
@@ -254,7 +257,7 @@ fun EnterCardNumber(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = vectorResource(drawable.ic_credit_card), // Replace with an appropriate card number icon if you have one
+                imageVector = vectorResource(drawable.ic_credit_card),
                 contentDescription = "Card number icon",
                 modifier = Modifier.size(24.dp)
             )
@@ -300,7 +303,7 @@ fun CardPasswordSection(
 ) {
     Column(modifier = modifier) {
         Text(
-            text = stringResource(string.cardPassword), // Update with the appropriate string resource ID
+            text = stringResource(string.cardPassword),
             color = MaterialTheme.colorScheme.inversePrimary,
             style = MaterialTheme.typography.bodyMedium
         )
@@ -334,7 +337,7 @@ fun EnterCardPassword(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
-                imageVector = vectorResource(drawable.ic_password), // Replace with an appropriate password icon
+                imageVector = vectorResource(drawable.ic_password),
                 contentDescription = "Password icon",
                 modifier = Modifier.size(24.dp)
             )
@@ -342,7 +345,7 @@ fun EnterCardPassword(
             TextField(
                 value = text,
                 onValueChange = { newValue ->
-                    val input = newValue.text.take(4) // Ensure only 4 characters
+                    val input = newValue.text.take(4)
                     text = newValue.copy(text = input)
                     onCardPasswordChange(input)
                 },
@@ -369,3 +372,71 @@ fun EnterCardPassword(
         }
     }
 }
+
+/** NOTE **/
+
+@Composable
+fun NoteSection(
+    modifier: Modifier = Modifier,
+    noteState: NoteState,
+    onNoteChange: (String) -> Unit,
+) {
+    Column(modifier = modifier) {
+        Text(
+            text = "Note",
+            color = MaterialTheme.colorScheme.inversePrimary,
+            style = MaterialTheme.typography.bodyMedium
+        )
+
+        Spacer(modifier = Modifier.height(10.dp))
+
+        EnterNote(
+            state = noteState,
+            onNoteChange = onNoteChange
+        )
+    }
+}
+
+@Composable
+fun EnterNote(
+    modifier: Modifier = Modifier,
+    state: NoteState,
+    onNoteChange: (String) -> Unit,
+) {
+    Surface(
+        color = MaterialTheme.colorScheme.secondaryContainer,
+        shape = RoundedCornerShape(10.dp),
+        modifier = modifier.heightIn(min = 60.dp)
+    ) {
+        TextField(
+            value = state.note,
+            onValueChange = onNoteChange,
+            placeholder = {
+                Text(
+                    text = "Enter note here...",
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontFamily = FontFamily(Font(font.poppins_light))
+                    )
+                )
+            },
+            colors = TextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
+                cursorColor = MaterialTheme.colorScheme.inversePrimary
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+                .defaultMinSize(minHeight = 60.dp),
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
+            textStyle = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily(Font(font.poppins_light))),
+            maxLines = 4,
+            singleLine = false
+        )
+    }
+}
+

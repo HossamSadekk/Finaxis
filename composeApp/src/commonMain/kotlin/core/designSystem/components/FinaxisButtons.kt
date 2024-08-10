@@ -62,9 +62,9 @@ fun FinaxisButton(
             .height(height),
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
-            disabledContainerColor = containerColor.copy(alpha = 0.5f) // Slightly different color for disabled state
+            disabledContainerColor = containerColor.copy(alpha = 0.5f)
         ),
-        enabled = isClickable && !isLoading // Enable/disable button based on conditions
+        enabled = isClickable && !isLoading
     ) {
         if (isLoading) {
             CircularProgressIndicator(
