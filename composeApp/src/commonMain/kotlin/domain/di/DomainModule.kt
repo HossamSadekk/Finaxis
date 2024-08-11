@@ -15,10 +15,12 @@ import domain.usecase.apiUseCases.TransferMoneyUseCase
 import domain.usecase.localUseCases.GetUserLoggedInUseCase
 import domain.usecase.localUseCases.GetUserPasscodeUseCase
 import domain.usecase.localUseCases.GetUserTokenUseCase
+import domain.usecase.localUseCases.GetUsernameUseCase
 import domain.usecase.localUseCases.IsUserHasAccountUseCase
 import domain.usecase.localUseCases.SaveUserLoggedInUseCase
 import domain.usecase.localUseCases.SaveUserPasscodeUseCase
 import domain.usecase.localUseCases.SaveUserTokenUseCase
+import domain.usecase.localUseCases.SaveUsernameUseCase
 import domain.usecase.localUseCases.SetUserHasAccountUseCase
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -44,4 +46,6 @@ val domainModule = module {
     singleOf(::RequestDetailsUseCase)
     singleOf(::TransferMoneyUseCase)
     singleOf(::RequestMoneyUseCase)
+    singleOf(::SaveUsernameUseCase)
+    singleOf(::GetUsernameUseCase)
 }

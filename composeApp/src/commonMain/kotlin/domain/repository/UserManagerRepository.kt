@@ -9,4 +9,6 @@ interface UserManagerRepository {
     suspend fun isUserHasAccount(): Boolean
     suspend fun saveUserPasscode(passcode: String)
     suspend fun getUserPasscode(): String
+    suspend fun saveUsername(username: String)
+    suspend fun getUsername(): String
 }

@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import core.local.dataStore.PreferencesKeys.PASSCODE
 import core.local.dataStore.PreferencesKeys.TOKEN_KEY
+import core.local.dataStore.PreferencesKeys.USERNAME
 import core.local.dataStore.PreferencesKeys.USER_HAS_ACCOUNT
 import core.local.dataStore.PreferencesKeys.USER_LOGGED_IN
 import domain.repository.UserManagerRepository
@@ -53,5 +54,16 @@ class UserManagerRepositoryImp(private val dataStore: DataStore<Preferences>) : 
     override suspend fun getUserPasscode(): String {
         val preferences = dataStore.data.first()
         return preferences[PASSCODE].orEmpty()
+    }
+
+    override suspend fun saveUsername(username: String) {
+        dataStore.edit { preferences ->
+            preferences[USERNAME] = username
+        }
+    }
+
+    override suspend fun getUsername(): String {
+        val preferences = dataStore.data.first()
+        return preferences[USERNAME].orEmpty()
     }
 }
