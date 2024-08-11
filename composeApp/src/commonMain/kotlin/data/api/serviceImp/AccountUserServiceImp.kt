@@ -5,13 +5,17 @@ import core.network.ktorHelpers.postRequest
 import core.network.utils.ApiResponse
 import core.network.utils.Endpoints.ACCOUNT_DETAILS
 import core.network.utils.Endpoints.CHECK_USERNAME
+import core.network.utils.Endpoints.PENDING_REQUESTS
 import core.network.utils.Endpoints.REQUEST_DETAILS
 import core.network.utils.Endpoints.REQUEST_MONEY
+import core.network.utils.Endpoints.RESPOND_REQUEST
 import core.network.utils.Endpoints.TRANSFER_MONEY
+import core.network.utils.Parameters.ACCEPT
 import core.network.utils.Parameters.AMOUNT
 import core.network.utils.Parameters.NOTE
 import core.network.utils.Parameters.RECEIVER
 import core.network.utils.Parameters.SENDER
+import core.network.utils.Parameters.TRANSACTION_ID
 import core.network.utils.Parameters.USERNAME
 import data.api.AccountUserService
 import data.model.AccountDetailsResponse
@@ -53,5 +57,17 @@ class AccountUserServiceImp(private val httpClient: HttpClient) : AccountUserSer
                 SENDER to senderUsername, RECEIVER to receiverUsername,
                 AMOUNT to amount.toString(), NOTE to note
             )
+        )
+
+    override suspend fun getPendingRequestTransactions(username: String): ApiResponse<List<TransactionResponseModel>> =
+        httpClient.getRequest(path = PENDING_REQUESTS, queryParams = mapOf(USERNAME to username))
+
+    override suspend fun respondToMoneyRequest(
+        transactionId: String,
+        accept: Boolean,
+    ): ApiResponse<TransactionResponseModel> =
+        httpClient.postRequest(
+            path = RESPOND_REQUEST,
+            queryParams = mapOf(TRANSACTION_ID to transactionId, ACCEPT to accept.toString())
         )
 }

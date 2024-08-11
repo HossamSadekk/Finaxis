@@ -22,4 +22,8 @@ interface AccountUserService {
         amount: Double,
         note: String,
     ): ApiResponse<TransactionResponseModel>
+
+    suspend fun getPendingRequestTransactions(username: String): ApiResponse<List<TransactionResponseModel>>
+
+    suspend fun respondToMoneyRequest(transactionId: String, accept: Boolean): ApiResponse<TransactionResponseModel>
 }

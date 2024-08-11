@@ -3,10 +3,12 @@ package domain.di
 import domain.usecase.apiUseCases.CheckIfUserExistUseCase
 import domain.usecase.apiUseCases.GetAccountDetailsUseCase
 import domain.usecase.apiUseCases.GetBanksUseCase
+import domain.usecase.apiUseCases.GetPendingRequestsUseCase
 import domain.usecase.apiUseCases.LoginUserUseCase
 import domain.usecase.apiUseCases.RegisterUserUseCase
 import domain.usecase.apiUseCases.RequestDetailsUseCase
 import domain.usecase.apiUseCases.RequestMoneyUseCase
+import domain.usecase.apiUseCases.RespondToRequestUseCase
 import domain.usecase.apiUseCases.SelectBankUseCase
 import domain.usecase.apiUseCases.SetCardInfoKYCUseCase
 import domain.usecase.apiUseCases.SetPhoneNumberKYCUseCase
@@ -48,4 +50,6 @@ val domainModule = module {
     singleOf(::RequestMoneyUseCase)
     singleOf(::SaveUsernameUseCase)
     singleOf(::GetUsernameUseCase)
+    singleOf(::GetPendingRequestsUseCase)
+    singleOf(::RespondToRequestUseCase)
 }

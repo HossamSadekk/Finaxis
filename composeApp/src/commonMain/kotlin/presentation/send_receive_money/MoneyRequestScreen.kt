@@ -1,4 +1,4 @@
-package presentation.money_request
+package presentation.send_receive_money
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -66,8 +66,8 @@ import org.koin.core.annotation.KoinExperimentalAPI
 import presentation.home.nav.Request
 import presentation.home.nav.Request.REQUEST_MONEY
 import presentation.home.nav.Request.SEND_MONEY
-import presentation.money_request.components.ConfirmationDialog
-import presentation.money_request.components.TransferMoneySuccessDialog
+import presentation.send_receive_money.components.ConfirmationDialog
+import presentation.send_receive_money.components.TransferMoneySuccessDialog
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable

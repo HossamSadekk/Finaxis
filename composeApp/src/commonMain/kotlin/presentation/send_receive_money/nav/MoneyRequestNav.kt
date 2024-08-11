@@ -1,4 +1,4 @@
-package presentation.money_request.nav
+package presentation.send_receive_money.nav
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import presentation.home.nav.Request
-import presentation.money_request.MoneyRequest
+import presentation.send_receive_money.MoneyRequest
 
 const val moneyRequestRoute = "moneyRequestRoute/{requestType}/{username}/{note}"
 fun NavGraphBuilder.moneyProcessRequest(onBackPressed: () -> Unit) {

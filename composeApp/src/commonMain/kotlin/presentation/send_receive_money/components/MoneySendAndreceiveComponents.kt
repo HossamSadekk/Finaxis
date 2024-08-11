@@ -1,4 +1,4 @@
-package presentation.money_request.components
+package presentation.send_receive_money.components
 
 import KottieAnimation
 import androidx.compose.foundation.BorderStroke

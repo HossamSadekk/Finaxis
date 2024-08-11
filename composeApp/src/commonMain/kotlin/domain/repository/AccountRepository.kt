@@ -2,7 +2,6 @@ package domain.repository
 
 import core.network.utils.ApiResponse
 import data.model.AccountDetailsResponse
-import data.model.AccountResponse
 import data.model.RequestDetailsResponse
 import data.model.TransactionResponseModel
 
@@ -22,5 +21,11 @@ interface AccountRepository {
         receiverUsername: String,
         amount: Double,
         note: String,
+    ): ApiResponse<TransactionResponseModel>
+
+    suspend fun getPendingRequestTransactions(username: String): ApiResponse<List<TransactionResponseModel>>
+    suspend fun respondToMoneyRequest(
+        transactionId: String,
+        accept: Boolean,
     ): ApiResponse<TransactionResponseModel>
 }

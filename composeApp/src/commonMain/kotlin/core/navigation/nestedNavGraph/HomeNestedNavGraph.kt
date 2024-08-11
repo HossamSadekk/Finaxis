@@ -6,8 +6,8 @@ import androidx.navigation.compose.navigation
 import presentation.MoneyRequests.nav.RequestsScreen
 import presentation.home.nav.homeScreen
 import presentation.home.nav.homeScreenRoute
-import presentation.money_request.nav.moneyProcessRequest
-import presentation.money_request.nav.navigateToMoneyRequest
+import presentation.send_receive_money.nav.moneyProcessRequest
+import presentation.send_receive_money.nav.navigateToMoneyRequest
 import presentation.settings.nav.settingsScreen
 import presentation.username_money_request.nav.navigateToRequestProcess
 import presentation.username_money_request.nav.requestProcessScreen

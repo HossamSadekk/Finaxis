@@ -22,6 +22,8 @@ object Endpoints {
     const val REQUEST_DETAILS = "api/request-details"
     const val TRANSFER_MONEY = "api/transaction/transfer"
     const val REQUEST_MONEY = "api/transaction/request"
+    const val PENDING_REQUESTS = "api/transaction/money-requests"
+    const val RESPOND_REQUEST = "api/transaction/respond"
 
 }
 
@@ -34,4 +36,6 @@ object Parameters {
     const val RECEIVER = "receiverUsername"
     const val AMOUNT = "amount"
     const val NOTE = "note"
+    const val TRANSACTION_ID = "transactionId"
+    const val ACCEPT = "accept"
 }

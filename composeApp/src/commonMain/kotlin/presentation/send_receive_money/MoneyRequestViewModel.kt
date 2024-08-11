@@ -1,4 +1,4 @@
-package presentation.money_request
+package presentation.send_receive_money
 
 import core.base.viewmodel.BaseViewModel
 import core.network.utils.RequestState
