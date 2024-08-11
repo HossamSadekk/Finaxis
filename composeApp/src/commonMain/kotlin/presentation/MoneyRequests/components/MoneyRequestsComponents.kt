@@ -21,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -94,7 +93,6 @@ fun TransactionItem(
     }
 }
 
-
 @Composable
 fun ShimmerTransactionItem() {
     Surface(
@@ -112,21 +110,22 @@ fun ShimmerTransactionItem() {
                 modifier = Modifier
                     .size(40.dp)
                     .clip(CircleShape)
-                    .background(Gray)
+                    .shimmerEffect()
             )
             Spacer(modifier = Modifier.height(10.dp))
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(20.dp)
-                    .background(Color.Gray)
+                    .shimmerEffect()
+
             )
             Spacer(modifier = Modifier.height(10.dp))
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(20.dp)
-                    .background(Color.Gray)
+                    .shimmerEffect()
             )
             Spacer(modifier = Modifier.height(10.dp))
             Row {
@@ -134,14 +133,14 @@ fun ShimmerTransactionItem() {
                     modifier = Modifier
                         .weight(1f)
                         .height(40.dp)
-                        .background(Color.Gray)
+                        .shimmerEffect()
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .height(40.dp)
-                        .background(Color.Gray)
+                        .shimmerEffect()
                 )
             }
         }
