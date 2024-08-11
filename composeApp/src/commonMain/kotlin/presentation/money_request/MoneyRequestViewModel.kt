@@ -6,6 +6,7 @@ import core.network.utils.RequestState.Idle
 import data.model.RequestDetailsResponse
 import data.model.TransactionResponseModel
 import domain.usecase.apiUseCases.RequestDetailsUseCase
+import domain.usecase.apiUseCases.RequestMoneyUseCase
 import domain.usecase.apiUseCases.TransferMoneyUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.update
 class MoneyRequestViewModel(
     private val requestDetailsUseCase: RequestDetailsUseCase,
     private val transferMoneyUseCase: TransferMoneyUseCase,
+    private val requestMoneyUseCase: RequestMoneyUseCase,
 ) : BaseViewModel() {
     private val _requestDetailsState = MutableStateFlow<RequestState<RequestDetailsResponse>>(Idle)
     val requestDetailsState: StateFlow<RequestState<RequestDetailsResponse>> get() = _requestDetailsState
@@ -39,6 +41,20 @@ class MoneyRequestViewModel(
             _transferMoneyState.update { RequestState.Error(error) }
         }, onSuccess = { response ->
             _transferMoneyState.update { RequestState.Success(response) }
+        })
+
+    private val _requestMoneyState = MutableStateFlow<RequestState<TransactionResponseModel>>(Idle)
+    val requestMoneyState: StateFlow<RequestState<TransactionResponseModel>> get() = _requestMoneyState
+
+    fun requestMoney(senderName: String, receiverName: String, amount: Double, note: String) =
+        executeUseCase(block = {
+            requestMoneyUseCase.execute(senderName, receiverName, amount, note)
+        }, onStart = {
+            _requestMoneyState.update { RequestState.Loading }
+        }, onError = { error ->
+            _requestMoneyState.update { RequestState.Error(error) }
+        }, onSuccess = { response ->
+            _requestMoneyState.update { RequestState.Success(response) }
         })
 
     fun resetErrorState() {

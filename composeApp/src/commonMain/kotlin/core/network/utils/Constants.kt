@@ -21,6 +21,7 @@ object Endpoints {
     const val CHECK_USERNAME = "api/check-username"
     const val REQUEST_DETAILS = "api/request-details"
     const val TRANSFER_MONEY = "api/transaction/transfer"
+    const val REQUEST_MONEY = "api/transaction/request"
 
 }
 

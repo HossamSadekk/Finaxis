@@ -6,6 +6,7 @@ import domain.usecase.apiUseCases.GetBanksUseCase
 import domain.usecase.apiUseCases.LoginUserUseCase
 import domain.usecase.apiUseCases.RegisterUserUseCase
 import domain.usecase.apiUseCases.RequestDetailsUseCase
+import domain.usecase.apiUseCases.RequestMoneyUseCase
 import domain.usecase.apiUseCases.SelectBankUseCase
 import domain.usecase.apiUseCases.SetCardInfoKYCUseCase
 import domain.usecase.apiUseCases.SetPhoneNumberKYCUseCase
@@ -42,4 +43,5 @@ val domainModule = module {
     singleOf(::CheckIfUserExistUseCase)
     singleOf(::RequestDetailsUseCase)
     singleOf(::TransferMoneyUseCase)
+    singleOf(::RequestMoneyUseCase)
 }

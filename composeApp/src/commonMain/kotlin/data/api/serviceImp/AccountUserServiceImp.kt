@@ -6,6 +6,7 @@ import core.network.utils.ApiResponse
 import core.network.utils.Endpoints.ACCOUNT_DETAILS
 import core.network.utils.Endpoints.CHECK_USERNAME
 import core.network.utils.Endpoints.REQUEST_DETAILS
+import core.network.utils.Endpoints.REQUEST_MONEY
 import core.network.utils.Endpoints.TRANSFER_MONEY
 import core.network.utils.Parameters.AMOUNT
 import core.network.utils.Parameters.NOTE
@@ -36,6 +37,19 @@ class AccountUserServiceImp(private val httpClient: HttpClient) : AccountUserSer
     ): ApiResponse<TransactionResponseModel> =
         httpClient.postRequest(
             path = TRANSFER_MONEY, queryParams = mapOf(
+                SENDER to senderUsername, RECEIVER to receiverUsername,
+                AMOUNT to amount.toString(), NOTE to note
+            )
+        )
+
+    override suspend fun requestMoney(
+        senderUsername: String,
+        receiverUsername: String,
+        amount: Double,
+        note: String,
+    ): ApiResponse<TransactionResponseModel> =
+        httpClient.postRequest(
+            path = REQUEST_MONEY, queryParams = mapOf(
                 SENDER to senderUsername, RECEIVER to receiverUsername,
                 AMOUNT to amount.toString(), NOTE to note
             )

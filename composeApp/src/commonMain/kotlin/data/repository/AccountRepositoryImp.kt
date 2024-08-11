@@ -24,4 +24,12 @@ class AccountRepositoryImp(private val accountUserService: AccountUserService) :
         note: String,
     ): ApiResponse<TransactionResponseModel> =
         accountUserService.transferMoney(senderUsername, receiverUsername, amount, note)
+
+    override suspend fun requestMoney(
+        senderUsername: String,
+        receiverUsername: String,
+        amount: Double,
+        note: String,
+    ): ApiResponse<TransactionResponseModel> =
+        accountUserService.requestMoney(senderUsername, receiverUsername, amount, note)
 }

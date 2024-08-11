@@ -142,7 +142,7 @@ fun TransactionItem(modifier: Modifier = Modifier, transaction: Transaction, acc
     }
     val amountColor = if (isSender) Color.Red else Color.Green
     val transactionText = if (isSender) {
-        "Send request to ${transaction.receiverAccount.username}"
+        "Send money to ${transaction.receiverAccount.username}"
     } else {
         if(transaction.type == "TRANSFER"){
             "Received from ${transaction.senderAccount.username}"

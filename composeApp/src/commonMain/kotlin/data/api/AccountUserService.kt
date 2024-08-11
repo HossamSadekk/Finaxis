@@ -16,4 +16,10 @@ interface AccountUserService {
         note: String,
     ): ApiResponse<TransactionResponseModel>
 
+    suspend fun requestMoney(
+        senderUsername: String,
+        receiverUsername: String,
+        amount: Double,
+        note: String,
+    ): ApiResponse<TransactionResponseModel>
 }

@@ -108,7 +108,7 @@ fun ConfirmationDialog(
 @OptIn(ExperimentalResourceApi::class)
 @Composable
 fun TransferMoneySuccessDialog(
-    transactionResponseModel: TransactionResponseModel,
+    transactionResponseModel: TransactionResponseModel?,
     onDismiss: () -> Unit,
 ) {
     var animation by remember { mutableStateOf("") }
@@ -126,6 +126,12 @@ fun TransferMoneySuccessDialog(
         iterations = 1,
         speed = 1f
     )
+
+    val request = if (transactionResponseModel?.type == "REQUEST") {
+        "request sent to"
+    } else {
+        "money sent to"
+    }
 
     Dialog(onDismissRequest = onDismiss) {
         Box(
@@ -145,13 +151,13 @@ fun TransferMoneySuccessDialog(
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "${transactionResponseModel.amount} EGP",
+                    text = "${transactionResponseModel?.amount} EGP",
                     style = MaterialTheme.typography.bodyLarge.copy(fontFamily = FontFamily(Font(font.poppins_semibold))),
                     color = MaterialTheme.colorScheme.inversePrimary
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    text = "Sent to ${transactionResponseModel.receiverUsername}",
+                    text = "$request ${transactionResponseModel?.receiverUsername}",
                     style = MaterialTheme.typography.bodyMedium.copy(fontFamily = FontFamily(Font(font.poppins_medium))),
                     color = MaterialTheme.colorScheme.onTertiary
                 )
@@ -184,7 +190,7 @@ fun TransferMoneySuccessDialog(
                             )
 
                             Text(
-                                text = transactionResponseModel.transactionId.toString(),
+                                text = transactionResponseModel?.transactionId.toString(),
                                 style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily(Font(font.poppins_regular))),
                                 color = MaterialTheme.colorScheme.inversePrimary,
                                 modifier = Modifier.weight(1f),
@@ -205,7 +211,7 @@ fun TransferMoneySuccessDialog(
                             )
 
                             Text(
-                                text = formatDate(transactionResponseModel.updatedAt),
+                                text = formatDate(transactionResponseModel?.updatedAt.orEmpty()),
                                 style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily(Font(font.poppins_regular))),
                                 color = MaterialTheme.colorScheme.inversePrimary,
                                 textAlign = TextAlign.End,
@@ -225,7 +231,7 @@ fun TransferMoneySuccessDialog(
                             )
 
                             Text(
-                                text = transactionResponseModel.note,
+                                text = transactionResponseModel?.note.orEmpty(),
                                 style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily(Font(font.poppins_regular))),
                                 color = MaterialTheme.colorScheme.inversePrimary,
                                 textAlign = TextAlign.End,
@@ -245,7 +251,7 @@ fun TransferMoneySuccessDialog(
                             )
 
                             Text(
-                                text = transactionResponseModel.status,
+                                text = transactionResponseModel?.status.orEmpty(),
                                 style = MaterialTheme.typography.bodySmall.copy(fontFamily = FontFamily(Font(font.poppins_regular))),
                                 color = MaterialTheme.colorScheme.inversePrimary,
                                 textAlign = TextAlign.End,

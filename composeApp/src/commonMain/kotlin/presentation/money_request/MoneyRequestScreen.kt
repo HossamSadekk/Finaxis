@@ -51,6 +51,7 @@ import core.extensions.formatCardNumber
 import core.network.utils.RequestState.Error
 import core.network.utils.RequestState.Loading
 import core.network.utils.RequestState.Success
+import data.model.TransactionResponseModel
 import finaxis.composeapp.generated.resources.Res.drawable
 import finaxis.composeapp.generated.resources.Res.font
 import finaxis.composeapp.generated.resources.avatar
@@ -80,9 +81,11 @@ fun MoneyRequest(request: Request, username: String, note: String, onBackPressed
     var showConfirmationDialog by remember { mutableStateOf(false) }
     var showSuccessDialog by remember { mutableStateOf(false) }
     var isErrorHandled by remember { mutableStateOf(false) }
+    var successData by remember { mutableStateOf<TransactionResponseModel?>(null) }
     val viewModel = koinViewModel<MoneyRequestViewModel>()
     val requestDetails by viewModel.requestDetailsState.collectAsState()
     val transferMoneyState by viewModel.transferMoneyState.collectAsState()
+    val requestMoneyState by viewModel.requestMoneyState.collectAsState()
 
 
     LaunchedEffect(Unit) {
@@ -199,7 +202,10 @@ fun MoneyRequest(request: Request, username: String, note: String, onBackPressed
                     }
 
                     REQUEST_MONEY -> {
-                        // TODO :: Handle Request
+                        viewModel.requestMoney(
+                            requestDetails.getSuccessData().senderUsername,
+                            requestDetails.getSuccessData().receiverName, amountToSend.value.toDouble(), note
+                        )
                     }
                 }
             },
@@ -221,14 +227,34 @@ fun MoneyRequest(request: Request, username: String, note: String, onBackPressed
 
         else -> {}
     }
-    LaunchedEffect(transferMoneyState) {
-        if (transferMoneyState is Success) {
-            showSuccessDialog = true
+    when(requestMoneyState) {
+        is Error -> {
+            errorMessage = transferMoneyState.getErrorMessage()
+            showErrorDialog = true
+        }
+
+        Loading -> {
+            Loader()
+        }
+
+        else -> {}
+    }
+
+    LaunchedEffect(transferMoneyState, requestMoneyState) {
+        when {
+            transferMoneyState is Success -> {
+                showSuccessDialog = true
+                successData = transferMoneyState.getSuccessData()
+            }
+            requestMoneyState is Success -> {
+                showSuccessDialog = true
+                successData = requestMoneyState.getSuccessData()
+            }
         }
     }
 
     if (showSuccessDialog) {
-        TransferMoneySuccessDialog(transferMoneyState.getSuccessData()) {
+        TransferMoneySuccessDialog(successData) {
             showSuccessDialog = false
         }
     }
