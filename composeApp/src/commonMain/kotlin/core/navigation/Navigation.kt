@@ -28,6 +28,7 @@ import presentation.splashScreen.nav.SplashScreenDest.PASSCODE
 import presentation.splashScreen.nav.SplashScreenDest.WELCOME_SCREEN
 import presentation.splashScreen.nav.splashScreen
 import presentation.splashScreen.nav.splashScreenRoute
+import presentation.transaction.nav.transactionScreenRoute
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_IN
 import presentation.welcomeScreen.nav.WelcomeScreenDest.SIGN_UP
 import presentation.welcomeScreen.nav.navigateToWelcomeScreen
@@ -40,11 +41,11 @@ fun MainNavigation(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    // Determine the selected tab based on the current route
     val selectedTabIndex = when (currentRoute) {
         homeScreenRoute -> 0
         moneyRequestsScreenRoute -> 1
-        settingsScreenRoute -> 2
+        transactionScreenRoute -> 2
+        settingsScreenRoute -> 3
         else -> -1
     }
     Scaffold(

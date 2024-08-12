@@ -19,8 +19,8 @@ import core.sharedPlatform.PlatformColors
 import data.model.TransactionResponseModel
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.annotation.KoinExperimentalAPI
-import presentation.MoneyRequests.components.ShimmerTransactionItem
-import presentation.MoneyRequests.components.TransactionItem
+import presentation.MoneyRequests.components.RequestItem
+import presentation.MoneyRequests.components.ShimmerRequestItem
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
@@ -43,7 +43,7 @@ fun MoneyRequestsScreen() {
         onLoading = {
             LazyColumn(modifier = Modifier.padding(bottom = 70.dp)) {
                 items(10) {
-                    ShimmerTransactionItem()
+                    ShimmerRequestItem()
                 }
             }
         },
@@ -106,7 +106,7 @@ fun TransactionList(
 ) {
     LazyColumn(modifier = Modifier.padding(bottom = 70.dp)) {
         items(transactions) { transaction ->
-            TransactionItem(
+            RequestItem(
                 transaction = transaction,
                 onAccept = onAccept,
                 onRefuse = onRefuse,

@@ -37,7 +37,7 @@ import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun TransactionItem(
+fun RequestItem(
     transaction: TransactionResponseModel,
     onAccept: (Int) -> Unit,
     onRefuse: (Int) -> Unit,
@@ -94,7 +94,7 @@ fun TransactionItem(
 }
 
 @Composable
-fun ShimmerTransactionItem() {
+fun ShimmerRequestItem() {
     Surface(
         border = BorderStroke(
             width = 1.dp,

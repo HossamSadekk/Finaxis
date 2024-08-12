@@ -9,6 +9,7 @@ import presentation.home.nav.homeScreenRoute
 import presentation.send_receive_money.nav.moneyProcessRequest
 import presentation.send_receive_money.nav.navigateToMoneyRequest
 import presentation.settings.nav.settingsScreen
+import presentation.transaction.nav.transactionScreen
 import presentation.username_money_request.nav.navigateToRequestProcess
 import presentation.username_money_request.nav.requestProcessScreen
 
@@ -22,6 +23,7 @@ fun NavGraphBuilder.homeNavGraph(navController: NavController) {
         })
         RequestsScreen()
         settingsScreen()
+        transactionScreen()
         // other composable
         requestProcessScreen(
             onBackPressed = { navController.navigateUp() },

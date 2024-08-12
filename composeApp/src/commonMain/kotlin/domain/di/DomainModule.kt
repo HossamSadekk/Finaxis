@@ -2,6 +2,7 @@ package domain.di
 
 import domain.usecase.apiUseCases.CheckIfUserExistUseCase
 import domain.usecase.apiUseCases.GetAccountDetailsUseCase
+import domain.usecase.apiUseCases.GetAccountTransactionUseCase
 import domain.usecase.apiUseCases.GetBanksUseCase
 import domain.usecase.apiUseCases.GetPendingRequestsUseCase
 import domain.usecase.apiUseCases.LoginUserUseCase
@@ -14,11 +15,13 @@ import domain.usecase.apiUseCases.SetCardInfoKYCUseCase
 import domain.usecase.apiUseCases.SetPhoneNumberKYCUseCase
 import domain.usecase.apiUseCases.SetUsernameKYCUseCase
 import domain.usecase.apiUseCases.TransferMoneyUseCase
+import domain.usecase.localUseCases.GetUserIdUseCase
 import domain.usecase.localUseCases.GetUserLoggedInUseCase
 import domain.usecase.localUseCases.GetUserPasscodeUseCase
 import domain.usecase.localUseCases.GetUserTokenUseCase
 import domain.usecase.localUseCases.GetUsernameUseCase
 import domain.usecase.localUseCases.IsUserHasAccountUseCase
+import domain.usecase.localUseCases.SaveUserIdUseCase
 import domain.usecase.localUseCases.SaveUserLoggedInUseCase
 import domain.usecase.localUseCases.SaveUserPasscodeUseCase
 import domain.usecase.localUseCases.SaveUserTokenUseCase
@@ -52,4 +55,7 @@ val domainModule = module {
     singleOf(::GetUsernameUseCase)
     singleOf(::GetPendingRequestsUseCase)
     singleOf(::RespondToRequestUseCase)
+    singleOf(::SaveUserIdUseCase)
+    singleOf(::GetUserIdUseCase)
+    singleOf(::GetAccountTransactionUseCase)
 }

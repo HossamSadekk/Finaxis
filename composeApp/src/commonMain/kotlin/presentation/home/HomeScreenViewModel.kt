@@ -5,6 +5,7 @@ import core.network.utils.RequestState
 import core.network.utils.RequestState.Idle
 import data.model.AccountDetailsResponse
 import domain.usecase.apiUseCases.GetAccountDetailsUseCase
+import domain.usecase.localUseCases.SaveUserIdUseCase
 import domain.usecase.localUseCases.SaveUsernameUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.update
 class HomeScreenViewModel(
     private val getAccountDetailsUseCase: GetAccountDetailsUseCase,
     private val saveUsernameUseCase: SaveUsernameUseCase,
+    private val saveUserIdUseCase: SaveUserIdUseCase,
 ) : BaseViewModel() {
 
     private val _accountDetails = MutableStateFlow<RequestState<AccountDetailsResponse>>(Idle)
@@ -29,12 +31,13 @@ class HomeScreenViewModel(
             }, onError = { error ->
                 _accountDetails.update { RequestState.Error(error) }
             }, onSuccess = { response ->
-                saveUsername(response.username)
+                saveUserInfo(response)
                 _accountDetails.update { RequestState.Success(response) }
             })
 
-    private fun saveUsername(username: String) =
+    private fun saveUserInfo(accountDetailsResponse: AccountDetailsResponse) =
         safeLaunch {
-            saveUsernameUseCase.execute(username)
+            saveUsernameUseCase.execute(accountDetailsResponse.username)
+            saveUserIdUseCase.execute(accountDetailsResponse.id)
         }
 }

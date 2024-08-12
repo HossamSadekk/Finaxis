@@ -11,4 +11,6 @@ interface UserManagerRepository {
     suspend fun getUserPasscode(): String
     suspend fun saveUsername(username: String)
     suspend fun getUsername(): String
+    suspend fun saveUserId(id: Int)
+    suspend fun getUserId(): Int
 }

@@ -3,6 +3,7 @@ package data.api
 import core.network.utils.ApiResponse
 import data.model.AccountDetailsResponse
 import data.model.RequestDetailsResponse
+import data.model.Transaction
 import data.model.TransactionResponseModel
 
 interface AccountUserService {
@@ -26,4 +27,6 @@ interface AccountUserService {
     suspend fun getPendingRequestTransactions(username: String): ApiResponse<List<TransactionResponseModel>>
 
     suspend fun respondToMoneyRequest(transactionId: String, accept: Boolean): ApiResponse<TransactionResponseModel>
+
+    suspend fun getTransactionList(accountId: Int): ApiResponse<List<Transaction>>
 }

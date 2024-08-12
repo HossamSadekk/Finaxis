@@ -1,6 +1,7 @@
 package core.local.dataStore
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 
 object PreferencesKeys {
@@ -9,4 +10,5 @@ object PreferencesKeys {
     val TOKEN_KEY = stringPreferencesKey("token_key")
     val PASSCODE = stringPreferencesKey("passcode")
     val USERNAME = stringPreferencesKey("username")
+    val USER_ID = intPreferencesKey("id")
 }

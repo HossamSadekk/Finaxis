@@ -25,13 +25,14 @@ import org.jetbrains.compose.resources.vectorResource
 import presentation.MoneyRequests.nav.moneyRequestsScreenRoute
 import presentation.home.nav.homeScreenRoute
 import presentation.settings.nav.settingsScreenRoute
+import presentation.transaction.nav.transactionScreenRoute
 
 sealed class BottomBarTab(val title: String, val iconResId: DrawableResource, val color: Color, val route: String) {
-    data object Profile : BottomBarTab(
+    data object Transaction : BottomBarTab(
         title = "Transaction",
         iconResId = Res.drawable.ic_transactions,
         color = Color(0xFFFFA574),
-        route = ""
+        route = transactionScreenRoute
     )
 
     data object Home : BottomBarTab(
@@ -59,7 +60,7 @@ sealed class BottomBarTab(val title: String, val iconResId: DrawableResource, va
 val tabs = listOf(
     BottomBarTab.Home,
     BottomBarTab.MoneyRequests,
-    BottomBarTab.Profile,
+    BottomBarTab.Transaction,
     BottomBarTab.Settings
 )
 
@@ -68,7 +69,7 @@ fun BottomBar(navController: NavController) {
     val items = listOf(
         BottomBarTab.Home,
         BottomBarTab.MoneyRequests,
-        BottomBarTab.Profile,
+        BottomBarTab.Transaction,
         BottomBarTab.Settings
     )
     val unSelectedColor = Color(0xFF6E6E6E)

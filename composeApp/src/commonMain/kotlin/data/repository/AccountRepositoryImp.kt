@@ -4,6 +4,7 @@ import core.network.utils.ApiResponse
 import data.api.AccountUserService
 import data.model.AccountDetailsResponse
 import data.model.RequestDetailsResponse
+import data.model.Transaction
 import data.model.TransactionResponseModel
 import domain.repository.AccountRepository
 
@@ -40,4 +41,7 @@ class AccountRepositoryImp(private val accountUserService: AccountUserService) :
         transactionId: String,
         accept: Boolean,
     ): ApiResponse<TransactionResponseModel> = accountUserService.respondToMoneyRequest(transactionId, accept)
+
+    override suspend fun getTransactionList(accountId: Int): ApiResponse<List<Transaction>> =
+        accountUserService.getTransactionList(accountId)
 }

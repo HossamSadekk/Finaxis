@@ -3,6 +3,7 @@ package domain.repository
 import core.network.utils.ApiResponse
 import data.model.AccountDetailsResponse
 import data.model.RequestDetailsResponse
+import data.model.Transaction
 import data.model.TransactionResponseModel
 
 interface AccountRepository {
@@ -28,4 +29,7 @@ interface AccountRepository {
         transactionId: String,
         accept: Boolean,
     ): ApiResponse<TransactionResponseModel>
+
+    suspend fun getTransactionList(accountId: Int): ApiResponse<List<Transaction>>
+
 }

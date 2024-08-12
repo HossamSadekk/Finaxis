@@ -12,6 +12,7 @@ import presentation.passcode.PasscodeViewmodel
 import presentation.send_receive_money.MoneyRequestViewModel
 import presentation.splashScreen.SplashViewModel
 import presentation.username_money_request.RequestScreenViewModel
+import presentation.transaction.TransactionViewModel
 
 val presentationModule = module {
     viewModelOf(::PasscodeViewmodel)
@@ -24,4 +25,5 @@ val presentationModule = module {
     viewModelOf(::RequestScreenViewModel)
     viewModelOf(::MoneyRequestViewModel)
     viewModelOf(::RequestsScreenViewModel)
+    viewModelOf(::TransactionViewModel)
 }

@@ -9,13 +9,16 @@ object Endpoints {
     // AUTH
     const val REGISTER = "auth/register"
     const val LOGIN = "auth/login"
+
     // BANK
     const val BANK = "api/banks"
+
     // KYC
     const val KYC_SELECT_BANK = "api/kyc/select-bank"
     const val KYC_PHONE_NUMBER = "api/kyc/phone-number"
     const val KYC_USERNAME = "api/kyc/submit-username"
     const val KYC_CARD_INFO = "api/kyc/submit-card"
+
     // ACCOUNT
     const val ACCOUNT_DETAILS = "api/me"
     const val CHECK_USERNAME = "api/check-username"
@@ -24,12 +27,14 @@ object Endpoints {
     const val REQUEST_MONEY = "api/transaction/request"
     const val PENDING_REQUESTS = "api/transaction/money-requests"
     const val RESPOND_REQUEST = "api/transaction/respond"
+    const val COMPLETED_TRANSACTION = "api/completed-transaction"
 
 }
 
 object Parameters {
     const val PHONE_NUMBER = "phoneNumber"
     const val USERNAME = "username"
+    const val ID = "accountId"
     const val CARD_NUMBER = "cardNumber"
     const val CARD_PASS = "cardPassword"
     const val SENDER = "senderUsername"

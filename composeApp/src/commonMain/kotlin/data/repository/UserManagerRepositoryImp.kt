@@ -7,6 +7,7 @@ import core.local.dataStore.PreferencesKeys.PASSCODE
 import core.local.dataStore.PreferencesKeys.TOKEN_KEY
 import core.local.dataStore.PreferencesKeys.USERNAME
 import core.local.dataStore.PreferencesKeys.USER_HAS_ACCOUNT
+import core.local.dataStore.PreferencesKeys.USER_ID
 import core.local.dataStore.PreferencesKeys.USER_LOGGED_IN
 import domain.repository.UserManagerRepository
 import kotlinx.coroutines.flow.first
@@ -65,5 +66,16 @@ class UserManagerRepositoryImp(private val dataStore: DataStore<Preferences>) : 
     override suspend fun getUsername(): String {
         val preferences = dataStore.data.first()
         return preferences[USERNAME].orEmpty()
+    }
+
+    override suspend fun saveUserId(id: Int) {
+        dataStore.edit { preferences ->
+            preferences[USER_ID] = id
+        }
+    }
+
+    override suspend fun getUserId(): Int {
+        val preferences = dataStore.data.first()
+        return preferences[USER_ID] ?: 0
     }
 }
