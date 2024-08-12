@@ -1,12 +1,15 @@
 package presentation.transaction.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -119,10 +122,7 @@ fun TransactionRow(label: String, value: String) {
 @Composable
 fun ShimmerTransactionItem() {
     Surface(
-        border = BorderStroke(
-            width = 1.dp,
-            color = MaterialTheme.colorScheme.inverseSurface,
-        ),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.inverseSurface),
         shape = RoundedCornerShape(DpDimensions.Small),
         color = MaterialTheme.colorScheme.secondaryContainer,
         modifier = Modifier
@@ -135,49 +135,102 @@ fun ShimmerTransactionItem() {
                 .padding(DpDimensions.Normal)
         ) {
             Spacer(modifier = Modifier.height(DpDimensions.Normal))
+            Row( modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                ShimmerText(modifier = Modifier.weight(1f))
-                ShimmerText(modifier = Modifier.weight(1f))
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
             }
-
             Spacer(modifier = Modifier.height(DpDimensions.Normal))
+            Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                ShimmerText(modifier = Modifier.weight(1f))
-                ShimmerText(modifier = Modifier.weight(1f))
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
             }
-
             Spacer(modifier = Modifier.height(DpDimensions.Normal))
+            Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                ShimmerText(modifier = Modifier.weight(1f))
-                ShimmerText(modifier = Modifier.weight(1f))
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
             }
-
             Spacer(modifier = Modifier.height(DpDimensions.Normal))
+            Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                ShimmerText(modifier = Modifier.weight(1f))
-                ShimmerText(modifier = Modifier.weight(1f))
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
             }
-
             Spacer(modifier = Modifier.height(DpDimensions.Normal))
+            Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                ShimmerText(modifier = Modifier.weight(1f))
-                ShimmerText(modifier = Modifier.weight(1f))
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
             }
+            Spacer(modifier = Modifier.height(DpDimensions.Normal))
+            Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
+
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(20.dp)
+                        .shimmerEffect()
+                )
+            }
+            Spacer(modifier = Modifier.height(DpDimensions.Normal))
         }
     }
 }
