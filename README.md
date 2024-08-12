@@ -1,14 +1,50 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+<div align="center">
+</br>
+<img src="/screenshots/background.png"/>
+</div>
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+</br>
+<p align="center">
+  <img alt="API" src="https://img.shields.io/badge/Api%2021+-50f270?logo=android&logoColor=black&style=for-the-badge"/>
+  
+  <a href="https://kotlinlang.org">
+      <img src="https://img.shields.io/badge/Kotlin-1.9.23-blue.svg?style=for-the-badge&logo=kotlin"/>
+  </a>
+  
+  <a href="https://github.com/HossamSadekk/Finaxis/stargazers">
+      <img src="https://img.shields.io/github/stars/HossamSadekk/Finaxis?color=ffff00&style=for-the-badge"/>
+  </a>
+  
+  <a href="https://hits.sh/github.com/HossamSadekk/Finaxis/">
+      <img alt="Hits" src="https://hits.sh/github.com/HossamSadekk/Finaxis.svg?style=for-the-badge&label=Views&extraCount=0&color=ff3f6f"/>
+  </a>
+  
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/HossamSadekk/Finaxis?style=for-the-badge"/>
+  
+  </br>
+</p>
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+# Finaxis - Secure Banking App for Android and iOS
 
+Finaxis is a cutting-edge banking application designed for both Android and iOS platforms, offering a seamless and secure way to manage your finances. Whether you're transferring funds, managing accounts, or tracking your transaction history, Finaxis provides an intuitive and efficient banking experience tailored to meet the needs of modern users.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## Goal 👀
+The primary goal of the Finaxis project is to enhance my skills by practicing and exploring new technologies. Specifically:
+
+- Compose Multiplatform: To gain hands-on experience with Jetpack Compose Multiplatform, enabling the creation of a unified user interface across Android and iOS platforms.
+- Backend Development with Spring Boot: To practice building a custom backend using Spring Boot, providing a robust and scalable server-side solution rather than relying on external APIs.
+This project serves as a learning opportunity to deepen my understanding of cross-platform development and backend engineering.
+
+## Project Structure and Design Principles 🛠
+**Finaxis** is built following the principles of Clean Architecture, which provides a clear separation of concerns and organizes the code into layers. The architecture is designed to make the app easy to extend and maintain.
+
+**Finaxis** is structured into three main layers:
+
+- **Presentation Layer:** Handles the UI using Jetpack Compose Multiplatform. Dependency injection (DI) is set up to manage UI components and state.
+  
+- **Domain Layer:** Contains the core business logic, including entities and use cases. It is independent of other layers, ensuring easy testability and adherence to **SOLID principles**.
+
+- **Data Layer:** Manages data sources, including API services and local storage. DI is used to provide repository implementations that interact with the domain layer.
+
+This architecture ensures a clean separation of concerns, making the project maintainable, scalable, and testable.
+
