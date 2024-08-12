@@ -38,7 +38,10 @@ fun TransactionsScreen() {
     var showErrorDialog by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        viewModel.getTransactionList()
+        viewModel.apply {
+            getAccountId()
+            getTransactionList()
+        }
     }
     transactionState.DisplayResult(
         onIdle = {},

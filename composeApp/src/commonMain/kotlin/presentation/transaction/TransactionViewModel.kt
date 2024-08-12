@@ -17,10 +17,6 @@ class TransactionViewModel(
     private val _transactionState = MutableStateFlow<RequestState<List<Transaction>>>(Idle)
     val transactionState: StateFlow<RequestState<List<Transaction>>> get() = _transactionState
 
-    init {
-        getAccountId()
-    }
-
     fun getTransactionList() =
         executeUseCase(block = { getAccountTransactionUseCase.execute(getUserIdUseCase.execute()) },
             onStart = {
@@ -31,7 +27,7 @@ class TransactionViewModel(
                 _transactionState.update { RequestState.Success(response) }
             })
 
-    private val _accountState = MutableStateFlow(8)
+    private val _accountState = MutableStateFlow(0)
     val accountState: StateFlow<Int> get() = _accountState
     fun getAccountId() = safeLaunch {
         _accountState.update { getUserIdUseCase.execute() }
