@@ -23,6 +23,7 @@
   
   </br>
 </p>
+
 # Finaxis - Secure Banking App for Android and iOS
 
 Finaxis is a cutting-edge banking application designed for both Android and iOS platforms, offering a seamless and secure way to manage your finances. Whether you're transferring funds, managing accounts, or tracking your transaction history, Finaxis provides an intuitive and efficient banking experience tailored to meet the needs of modern users.
