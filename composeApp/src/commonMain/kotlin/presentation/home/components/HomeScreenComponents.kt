@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -57,8 +56,7 @@ fun BankCardUi(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
-            ,
+            .padding(16.dp),
         shape = RoundedCornerShape(35.dp),
         elevation = 16.dp
     ) {
@@ -136,17 +134,41 @@ fun BankCardUi(
 fun TransactionItem(modifier: Modifier = Modifier, transaction: Transaction, accountId: Int) {
     val isSender = transaction.senderAccount.id == accountId
     val amountText = if (isSender) {
-        "-${transaction.amount}"
+        if (transaction.type == "REQUEST") {
+            "+${transaction.amount}"
+        } else {
+            "-${transaction.amount}"
+        }
     } else {
-        "+${transaction.amount}"
+        if (transaction.type == "TRANSFER") {
+            "+${transaction.amount}"
+        } else {
+            "-${transaction.amount}"
+        }
     }
-    val amountColor = if (isSender) Color.Red else Color.Green
-    val transactionText = if (isSender) {
-        "Send money to ${transaction.receiverAccount.username}"
+    val amountColor = if (isSender) {
+        if (transaction.type == "REQUEST") {
+            Color.Green
+        } else {
+            Color.Red
+        }
     } else {
-        if(transaction.type == "TRANSFER"){
+        if (transaction.type == "TRANSFER") {
+            Color.Green
+        } else {
+            Color.Red
+        }
+    }
+    val transactionText = if (isSender) {
+        if (transaction.type == "REQUEST") {
+            "collected from ${transaction.receiverAccount.username}"
+        } else {
+            "Send money to ${transaction.receiverAccount.username}"
+        }
+    } else {
+        if (transaction.type == "TRANSFER") {
             "Received from ${transaction.senderAccount.username}"
-        }else{
+        } else {
             "Request from ${transaction.senderAccount.username}"
         }
     }
