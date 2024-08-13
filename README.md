@@ -60,3 +60,14 @@ This architecture ensures a clean separation of concerns, making the project mai
 | ![16](./screenshots/iphone_screenshots/16.png) | ![17](./screenshots/iphone_screenshots/17.png) | ![18](./screenshots/iphone_screenshots/18.png) |
 | ![19](./screenshots/iphone_screenshots/19.png) |
 
+## 📸 Screenshots For Android
+
+|   |   |   |
+|---|---|---|
+| ![1](./screenshots/android_screenshots/1.png) | ![2](./screenshots/android_screenshots/2.png) | ![3](./screenshots/android_screenshots/3.png) |
+| ![4](./screenshots/android_screenshots/4.png) | ![5](./screenshots/android_screenshots/5.png) | ![6](./screenshots/android_screenshots/6.png) |
+| ![7](./screenshots/android_screenshots/7.png) | ![8](./screenshots/android_screenshots/8.png) | ![9](./screenshots/android_screenshots/9.png) |
+| ![10](./screenshots/android_screenshots/10.png) | ![11](./screenshots/android_screenshots/11.png) | ![12](./screenshots/android_screenshots/12.png) |
+| ![13](./screenshots/android_screenshots/13.png) | ![14](./screenshots/android_screenshots/14.png) | ![15](./screenshots/android_screenshots/15.png) |
+| ![16](./screenshots/android_screenshots/16.png) | ![17](./screenshots/android_screenshots/17.png) | ![18](./screenshots/android_screenshots/18.png) |
+| ![19](./screenshots/android_screenshots/19.png) | ![20](./screenshots/android_screenshots/20.png) | ![21](./screenshots/android_screenshots/21.png) |
