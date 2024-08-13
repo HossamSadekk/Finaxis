@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import core.sharedPlatform.PlatformColors
 import dev.materii.pullrefresh.DragRefreshIndicator
@@ -110,13 +111,26 @@ fun HomeScreen(onRequestProcess: (Request) -> Unit) {
                             color = MaterialTheme.colorScheme.onSecondary,
                         )
                     }
-
-                    items(accountDetails.transactions) { transaction ->
-                        TransactionItem(
-                            modifier = Modifier.padding(horizontal = 16.dp, vertical = 5.dp),
-                            transaction = transaction,
-                            accountId = accountDetails.id
-                        )
+                    if (accountDetails.transactions.isEmpty()) {
+                        item {
+                            Text(
+                                text = "No transactions available",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 100.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                                style = MaterialTheme.typography.bodyLarge,
+                                textAlign = TextAlign.Center,
+                                color = MaterialTheme.colorScheme.onSecondary
+                            )
+                        }
+                    } else {
+                        items(accountDetails.transactions) { transaction ->
+                            TransactionItem(
+                                modifier = Modifier.padding(horizontal = 16.dp, vertical = 5.dp),
+                                transaction = transaction,
+                                accountId = accountDetails.id
+                            )
+                        }
                     }
                 }
             }
